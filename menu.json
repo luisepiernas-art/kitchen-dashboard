@@ -1,0 +1,146 @@
+{
+  "last_updated": "2026-11-13T20:50:00Z",
+  "location": "Torrejón de Ardoz",
+  "coords": {
+    "lat": 40.45,
+    "lon": -3.48
+  },
+  "default_schedule": [
+    { "time": "08:30", "desc": "Entrada al colegio · Comienzo de jornada" },
+    { "time": "14:00", "desc": "Almuerzo en casa (Comida familiar)" },
+    { "time": "17:00", "desc": "Salida escolar · Merienda infantil" },
+    { "time": "18:15", "desc": "Actividades / Deberes / Tiempo libre" },
+    { "time": "20:30", "desc": "Cena familiar reunidos" }
+  ],
+  "default_todos": [
+    { "text": "Comprar judías verdes y pechugas de pollo", "done": false },
+    { "text": "Descongelar carne picada para boloñesa", "done": true },
+    { "text": "Revisar mochila escolar y firmar autorización", "done": false },
+    { "text": "Comprar fruta fresca (plátanos y peras)", "done": false }
+  ],
+  "days": {
+    "lunes": {
+      "name": "Lunes",
+      "colegio": {
+        "dish_main": "Arroz con verduras + Filete de merluza a la romana",
+        "dish_sub": "1er plato: Arroz marinero con verduras · 2º plato: Merluza con ensalada",
+        "dessert": "Plátano de Canarias",
+        "verified": true
+      },
+      "mediodia": {
+        "dish_main": "Crema de calabacín casera + Pechuga a la plancha",
+        "dish_sub": "Verduras de huerta y pechuga marinada al limón"
+      },
+      "cena": {
+        "dish_main": "Tortilla francesa con espárragos y ensalada mixta",
+        "dish_sub": "Cena ligera de digestión rápida para empezar la semana",
+        "dessert": "Yogur natural"
+      },
+      "balance": "Menú compensado: Pescado al mediodía y huevo ligero por la noche."
+    },
+    "martes": {
+      "name": "Martes",
+      "colegio": {
+        "dish_main": "Lentejas eco a la jardinera + Tortilla de patatas con ensalada",
+        "dish_sub": "1er plato: Lentejas ecológicas estofadas · 2º plato: Tortilla española",
+        "dessert": "Pera fresca de temporada",
+        "verified": true
+      },
+      "mediodia": {
+        "dish_main": "Espaguetis artesanos a la Boloñesa",
+        "dish_sub": "Pasta al dente, carne picada magra, tomate casero y parmesano"
+      },
+      "cena": {
+        "dish_main": "Pechugas de pollo a la plancha con judías verdes",
+        "dish_sub": "Proteína magra limpia tras la legumbre y huevo del mediodía",
+        "dessert": "Yogur natural / Fruta"
+      },
+      "balance": "Menú balanceado: Evitamos repetir legumbre y huevo en la cena."
+    },
+    "miercoles": {
+      "name": "Miércoles",
+      "colegio": {
+        "dish_main": "Puré de verduras + Albóndigas en salsa con patatas",
+        "dish_sub": "1er plato: Puré de calabaza y zanahoria · 2º plato: Albóndigas caseras",
+        "dessert": "Manzana dulce",
+        "verified": true
+      },
+      "mediodia": {
+        "dish_main": "Lentejas caseras con arroz y verduras",
+        "dish_sub": "Plato completo de cuchara tradicional"
+      },
+      "cena": {
+        "dish_main": "Salmón al horno con rodajas de calabacín y patata baby",
+        "dish_sub": "Omega 3 y digestión limpia para descansar bien",
+        "dessert": "Infusión / Fruta fresca"
+      },
+      "balance": "Equilibrado: Buena recarga de hierro y ácidos grasos saludables."
+    },
+    "jueves": {
+      "name": "Jueves",
+      "colegio": {
+        "dish_main": "Macarrones gratinados con tomate y queso + Cinta de lomo",
+        "dish_sub": "1er plato: Macarrones · 2º plato: Lomo adobado con pimientos",
+        "dessert": "Mandarina",
+        "verified": true
+      },
+      "mediodia": {
+        "dish_main": "Pollo asado al romero con ensalada verde",
+        "dish_sub": "Muslos de pollo al horno crujiente con tomate y lechuga"
+      },
+      "cena": {
+        "dish_main": "Crema de puerros y patata (Vichyssoise tibia) + Huevo poché",
+        "dish_sub": "Cena reconfortante y ligera",
+        "dessert": "Yogur con nueces"
+      },
+      "balance": "Compensado: Sin carbohidratos pesados por la noche."
+    },
+    "viernes": {
+      "name": "Viernes",
+      "colegio": {
+        "dish_main": "Garbanzos con espinacas + Varitas de merluza con mahonesa",
+        "dish_sub": "1er plato: Potaje suave de garbanzos · 2º plato: Pescado blanco",
+        "dessert": "Plátano",
+        "verified": true
+      },
+      "mediodia": {
+        "dish_main": "Arroz meloso con setas y verduras de temporada",
+        "dish_sub": "Receta sabrosa para cerrar la semana escolar"
+      },
+      "cena": {
+        "dish_main": "Pizzetas caseras de masa fina con verdura y mozzarella",
+        "dish_sub": "Cena especial de viernes en familia",
+        "dessert": "Macedonia de frutas frescas"
+      },
+      "balance": "¡Viernes familiar! Disfrute moderado y equilibrado."
+    },
+    "sabado": {
+      "name": "Sábado",
+      "colegio": null,
+      "mediodia": {
+        "dish_main": "Guiso tradicional de ternera con patatas y zanahorias",
+        "dish_sub": "Comida de fin de semana cocinada a fuego lento"
+      },
+      "cena": {
+        "dish_main": "Hamburguesas caseras de pavo con ensalada templada",
+        "dish_sub": "Carne magra especiada con rúcula y tomate seco",
+        "dessert": "Yogur griego"
+      },
+      "balance": "Fin de semana: Comida casera completa y rica en nutrientes."
+    },
+    "domingo": {
+      "name": "Domingo",
+      "colegio": null,
+      "mediodia": {
+        "dish_main": "Paella mixta o Arroz con pollo y marisco",
+        "dish_sub": "Reunión familiar de domingo"
+      },
+      "cena": {
+        "dish_main": "Sopa castellana reconfortante con huevo cuajado",
+        "dish_sub": "Cena digestiva preparando el inicio de semana",
+        "dessert": "Manzana asada con canela"
+      },
+      "balance": "Cena ultra digestiva para un sueño reparador escolar."
+    }
+  }
+}
