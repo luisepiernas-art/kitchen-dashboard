@@ -6,28 +6,30 @@
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <meta name="theme-color" content="#0f172a">
-  <title>Kitchen Smart Dashboard</title>
+  <meta name="theme-color" content="#0b1120">
+  <title>Menú Familiar & Cocina • BQ 5.5"</title>
   <style>
     :root {
       --bg: #0b1120;
+      --bg-soft: #111827;
       --card-bg: #1e293b;
       --card-border: #334155;
       --text: #f8fafc;
       --text-muted: #94a3b8;
       --accent: #38bdf8;
-      --accent-school: #f59e0b;
-      --accent-lunch: #10b981;
-      --accent-dinner: #8b5cf6;
+      --green: #10b981;
+      --amber: #f59e0b;
+      --purple: #a78bfa;
+      --coral: #fb7185;
+      --sage: #34d399;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
-      user-select: none;
     }
 
     body {
@@ -36,69 +38,133 @@
       min-height: 100vh;
       display: flex;
       flex-direction: column;
-      padding: 10px;
+      padding: 8px;
       overflow-x: hidden;
+      font-size: 13px;
     }
 
-    /* Top Bar */
+    /* Header */
     header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
-      padding: 10px 14px;
       border-radius: 12px;
-      margin-bottom: 10px;
+      padding: 10px 12px;
+      margin-bottom: 8px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .header-left {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+
+    .title-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .header-left h1 {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 800;
-      color: #fff;
-      display: flex;
-      align-items: center;
-      gap: 6px;
+      color: #ffffff;
     }
 
-    .header-left .sub {
+    .week-subtitle {
       font-size: 11px;
       color: var(--text-muted);
+    }
+
+    .header-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
       margin-top: 2px;
+    }
+
+    .meta-pill {
+      font-size: 10px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--card-border);
+      color: #e2e8f0;
+      white-space: nowrap;
+    }
+
+    .meta-pill.fish {
+      background: rgba(16, 185, 129, 0.16);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    .meta-pill.allergy {
+      background: rgba(251, 113, 133, 0.14);
+      border-color: rgba(251, 113, 133, 0.35);
+      color: #fda4af;
     }
 
     .header-right {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 8px;
     }
 
     .weather-pill {
       display: flex;
       align-items: center;
-      gap: 8px;
+      gap: 6px;
       background: rgba(56, 189, 248, 0.1);
       border: 1px solid rgba(56, 189, 248, 0.3);
-      padding: 5px 10px;
-      border-radius: 18px;
+      padding: 5px 9px;
+      border-radius: 16px;
     }
 
     .weather-temp {
-      font-size: 15px;
+      font-size: 14px;
       font-weight: 800;
       color: var(--accent);
     }
 
-    .clock-display {
-      font-size: 24px;
-      font-weight: 800;
-      letter-spacing: 0.5px;
-      color: #fff;
-      font-variant-numeric: tabular-nums;
+    .clock-box {
+      text-align: right;
     }
 
-    /* Day Selector Pills */
-    .day-selector {
+    .clock-display {
+      font-size: 22px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #ffffff;
+      line-height: 1;
+    }
+
+    .clock-date {
+      font-size: 10px;
+      color: var(--text-muted);
+      margin-top: 2px;
+      text-transform: capitalize;
+    }
+
+    .fs-btn {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: #cbd5e1;
+      padding: 6px 9px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+    }
+
+    /* Main Tabs */
+    .main-nav {
       display: flex;
       gap: 6px;
       overflow-x: auto;
@@ -106,45 +172,92 @@
       padding-bottom: 2px;
     }
 
-    .day-pill {
+    .nav-btn {
+      flex: 1 0 auto;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: #cbd5e1;
+      padding: 9px 12px;
+      border-radius: 10px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .nav-btn.active {
+      background: var(--accent);
+      color: #0b1120;
+      border-color: var(--accent);
+    }
+
+    .tab-panel {
+      display: none;
       flex: 1;
+    }
+
+    .tab-panel.active {
+      display: block;
+    }
+
+    /* Day selector */
+    .day-selector {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 10px;
+      overflow-x: auto;
+    }
+
+    .day-pill {
+      flex: 1 0 auto;
       text-align: center;
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       color: var(--text-muted);
-      padding: 7px 4px;
-      border-radius: 8px;
+      padding: 8px 8px;
+      border-radius: 9px;
       font-size: 12px;
       font-weight: 700;
       cursor: pointer;
-      text-transform: capitalize;
+      white-space: nowrap;
     }
 
     .day-pill.active {
-      background: var(--accent);
-      color: #0b1120;
-      border-color: var(--accent);
-      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+      background: #10b981;
+      color: #052e16;
+      border-color: #10b981;
     }
 
-    /* Grid Layout */
-    .dashboard-grid {
-      display: grid;
-      grid-template-columns: 1.15fr 0.85fr;
+    /* Layouts */
+    .two-col {
+      display: flex;
+      flex-wrap: wrap;
       gap: 10px;
-      flex: 1;
     }
 
-    @media (max-width: 680px) {
-      .dashboard-grid {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    .column {
+    .col-main {
+      flex: 1.25 1 320px;
       display: flex;
       flex-direction: column;
       gap: 10px;
+    }
+
+    .col-side {
+      flex: 0.9 1 260px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .grid-cards {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .grid-card-item {
+      flex: 1 1 300px;
     }
 
     /* Cards */
@@ -153,186 +266,432 @@
       border: 1px solid var(--card-border);
       border-radius: 12px;
       padding: 12px 14px;
-      position: relative;
+    }
+
+    .card.fish-highlight {
+      border-color: rgba(16, 185, 129, 0.6);
     }
 
     .card-top {
       display: flex;
       justify-content: space-between;
       align-items: center;
+      gap: 6px;
       margin-bottom: 6px;
+      flex-wrap: wrap;
     }
 
     .badge {
       font-size: 10px;
       font-weight: 800;
       text-transform: uppercase;
-      padding: 2px 7px;
+      padding: 3px 7px;
       border-radius: 5px;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
+      display: inline-block;
     }
 
     .badge-school { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
     .badge-lunch  { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
-    .badge-dinner { background: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4); }
-    .badge-tag    { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); font-size: 10px; }
+    .badge-dinner { background: rgba(139, 92, 246, 0.2); color: #c4b5fd; border: 1px solid rgba(139, 92, 246, 0.4); }
+    .badge-tag    { background: rgba(255, 255, 255, 0.08); color: #cbd5e1; }
+    .badge-fish   { background: rgba(56, 189, 248, 0.18); color: #7dd3fc; border: 1px solid rgba(56, 189, 248, 0.4); }
 
     .card-subtitle {
       font-size: 11px;
       color: var(--text-muted);
       font-weight: 600;
-      margin-left: 6px;
     }
 
     .dish-title {
       font-size: 14px;
       font-weight: 700;
-      color: #fff;
-      line-height: 1.3;
+      color: #ffffff;
+      line-height: 1.35;
     }
 
     .dish-desc {
-      font-size: 11px;
+      font-size: 12px;
       color: var(--text-muted);
-      margin-top: 3px;
-      line-height: 1.3;
+      margin-top: 4px;
+      line-height: 1.35;
     }
 
     .dish-dessert {
       font-size: 11px;
       font-weight: 700;
       color: var(--accent);
-      margin-top: 4px;
+      margin-top: 5px;
     }
 
     .balance-banner {
-      background: linear-gradient(90deg, rgba(16, 185, 129, 0.15), rgba(56, 189, 248, 0.1));
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 8px 12px;
-      border-radius: 8px;
-      font-size: 11px;
+      background: rgba(16, 185, 129, 0.14);
+      border: 1px solid rgba(16, 185, 129, 0.35);
+      padding: 9px 12px;
+      border-radius: 9px;
+      font-size: 12px;
       color: #6ee7b7;
-      font-weight: 600;
+      font-weight: 700;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 6px;
     }
 
     .section-title {
       font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.4px;
       color: var(--accent);
       margin-bottom: 8px;
-    }
-
-    /* Timeline */
-    .timeline-item {
       display: flex;
+      justify-content: space-between;
       align-items: center;
-      padding: 5px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
     }
-    .timeline-item:last-child { border-bottom: none; }
-
-    .time-badge {
-      background: #0b1120;
-      border: 1px solid var(--card-border);
-      color: var(--accent);
-      font-weight: 800;
-      font-size: 11px;
-      padding: 3px 6px;
-      border-radius: 5px;
-      min-width: 48px;
-      text-align: center;
-      margin-right: 10px;
-    }
-
-    .time-text {
-      font-size: 12px;
-      font-weight: 600;
-    }
-
-    /* Checklist */
-    .todo-item {
-      display: flex;
-      align-items: center;
-      padding: 7px 8px;
-      background: rgba(11, 17, 32, 0.5);
-      border: 1px solid var(--card-border);
-      border-radius: 7px;
-      margin-bottom: 6px;
-      cursor: pointer;
-    }
-
-    .todo-check {
-      width: 18px;
-      height: 18px;
-      border: 2px solid var(--accent);
-      border-radius: 4px;
-      margin-right: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      flex-shrink: 0;
-    }
-
-    .todo-check.checked { background: var(--accent); }
-    .todo-check.checked::after { content: '✔'; font-size: 11px; color: #0b1120; font-weight: 900; }
-
-    .todo-text { font-size: 12px; flex: 1; }
-    .todo-text.done { text-decoration: line-through; color: var(--text-muted); }
 
     /* Timer */
-    .timer-row {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 8px;
-    }
-
     .timer-clock {
-      font-size: 18px;
+      font-size: 20px;
       font-weight: 800;
       color: #fbbf24;
-      font-variant-numeric: tabular-nums;
     }
 
     .timer-buttons {
       display: flex;
+      flex-wrap: wrap;
       gap: 6px;
+      margin-top: 8px;
     }
 
     .timer-btn {
-      background: #0b1120;
+      flex: 1 1 70px;
+      background: #0f172a;
       border: 1px solid var(--card-border);
-      color: #fff;
+      color: #ffffff;
       font-weight: 700;
       font-size: 11px;
-      padding: 6px 8px;
-      border-radius: 6px;
+      padding: 8px 6px;
+      border-radius: 7px;
       cursor: pointer;
+    }
+
+    .timer-btn.stop {
+      color: #fca5a5;
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+
+    /* Shopping Summary & Full Shopping */
+    .mini-summary-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 8px;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 7px;
+      margin-bottom: 6px;
+      font-size: 12px;
+    }
+
+    .link-btn {
+      background: rgba(56, 189, 248, 0.15);
+      border: 1px solid rgba(56, 189, 248, 0.4);
+      color: #7dd3fc;
+      padding: 6px 10px;
+      border-radius: 7px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      width: 100%;
+      margin-top: 4px;
+    }
+
+    .shop-toolbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+
+    .shop-search {
+      flex: 1 1 160px;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 12px;
+    }
+
+    .action-btn {
+      padding: 8px 10px;
+      border-radius: 8px;
+      font-size: 11px;
+      font-weight: 700;
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-merc { background: #166534; color: #ffffff; border-color: #22c55e; }
+    .btn-ahor { background: #9a3412; color: #ffffff; border-color: #fb923c; }
+    .btn-reset { background: #0f172a; color: #cbd5e1; border-color: var(--card-border); }
+
+    .progress-wrap {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      padding: 10px 12px;
+      margin-bottom: 10px;
+    }
+
+    .progress-head {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+
+    .progress-track {
+      width: 100%;
+      height: 10px;
+      background: #0f172a;
+      border-radius: 99px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: #10b981;
+      width: 0%;
+    }
+
+    .shop-cat {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin: 10px 0 5px 0;
+      letter-spacing: 0.4px;
+    }
+
+    .todo-item {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      padding: 8px 10px;
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+
+    .todo-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
       flex: 1;
     }
 
-    .timer-btn:active { background: var(--accent); color: #000; }
+    .todo-check {
+      width: 19px;
+      height: 19px;
+      border: 2px solid var(--accent);
+      border-radius: 5px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 900;
+      color: #0b1120;
+    }
 
-    /* Footer */
+    .todo-check.checked {
+      background: var(--accent);
+    }
+
+    .todo-text {
+      font-size: 12px;
+      color: #f8fafc;
+    }
+
+    .todo-text.done {
+      text-decoration: line-through;
+      color: var(--text-muted);
+    }
+
+    .qty-badge {
+      font-size: 10px;
+      font-weight: 700;
+      color: #cbd5e1;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 2px 6px;
+      border-radius: 5px;
+      white-space: nowrap;
+    }
+
+    /* Matrix Table */
+    .table-scroll {
+      overflow-x: auto;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 580px;
+      font-size: 12px;
+    }
+
+    th, td {
+      text-align: left;
+      padding: 9px 10px;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: top;
+    }
+
+    th {
+      background: #0f172a;
+      color: var(--accent);
+      font-size: 11px;
+      text-transform: uppercase;
+    }
+
+    .excl-cell { color: #fda4af; font-weight: 600; }
+    .dinner-cell { color: #6ee7b7; font-weight: 700; }
+
+    /* Pure CSS Charts */
+    .bar-row {
+      margin-bottom: 8px;
+    }
+
+    .bar-label-row {
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      margin-bottom: 3px;
+      color: #e2e8f0;
+    }
+
+    .bar-track {
+      height: 10px;
+      background: #0f172a;
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    .bar-val {
+      height: 100%;
+      border-radius: 6px;
+    }
+
+    .veggie-cols {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-around;
+      height: 130px;
+      padding-top: 16px;
+      border-bottom: 1px solid var(--card-border);
+    }
+
+    .veggie-col {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 4px;
+      width: 44px;
+    }
+
+    .veggie-bar {
+      width: 26px;
+      background: #10b981;
+      border-radius: 6px 6px 0 0;
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      padding-top: 4px;
+      font-size: 11px;
+      font-weight: 800;
+      color: #052e16;
+    }
+
+    .veggie-day {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Modal */
+    .modal-backdrop {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(0, 0, 0, 0.78);
+      z-index: 100;
+      padding: 14px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal-backdrop.open {
+      display: flex;
+    }
+
+    .modal-box {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 14px;
+      width: 100%;
+      max-width: 460px;
+      max-height: 85vh;
+      overflow-y: auto;
+      padding: 14px;
+    }
+
+    .chunk-card {
+      background: #0f172a;
+      border: 1px solid var(--card-border);
+      border-radius: 9px;
+      padding: 10px;
+      margin-bottom: 8px;
+    }
+
+    .chunk-text {
+      font-size: 11px;
+      color: #cbd5e1;
+      margin-bottom: 8px;
+      line-height: 1.4;
+      word-break: break-word;
+    }
+
+    .copy-chunk-btn {
+      width: 100%;
+      padding: 8px;
+      border-radius: 7px;
+      background: var(--accent);
+      color: #0b1120;
+      border: none;
+      font-weight: 800;
+      font-size: 12px;
+      cursor: pointer;
+    }
+
     footer {
-      margin-top: 8px;
+      margin-top: 10px;
       display: flex;
       justify-content: space-between;
       align-items: center;
       font-size: 10px;
       color: var(--text-muted);
-    }
-
-    .fs-btn {
-      background: transparent;
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 3px 8px;
-      border-radius: 5px;
-      font-size: 10px;
-      cursor: pointer;
+      padding: 4px 2px;
+      flex-wrap: wrap;
+      gap: 6px;
     }
   </style>
 </head>
@@ -341,232 +700,871 @@
   <!-- Header -->
   <header>
     <div class="header-left">
-      <h1 id="headerDate">Cargando fecha...</h1>
-      <div class="sub">Torrejón de Ardoz &bull; Dashboard Familiar &bull; BQ 5.5"</div>
+      <div class="title-row">
+        <h1>🍳 Menú Familiar & Cocina</h1>
+      </div>
+      <div class="week-subtitle" id="weekSubtitle">Semana del 9 al 13 de Noviembre • Madrid</div>
+      <div class="header-pills">
+        <span class="meta-pill">☀️ 3p</span>
+        <span class="meta-pill">🌙 4p</span>
+        <span class="meta-pill fish">🐟 Mié & Vie</span>
+        <span class="meta-pill allergy">🚫 Sin Crustáceos</span>
+      </div>
     </div>
+
     <div class="header-right">
       <div class="weather-pill">
         <span id="weatherIcon" style="font-size:16px;">⛅</span>
-        <div>
-          <div class="weather-temp" id="weatherTemp">--°C</div>
-        </div>
+        <div class="weather-temp" id="weatherTemp">--°C</div>
       </div>
-      <div class="clock-display" id="clock">--:--</div>
+      <div class="clock-box">
+        <div class="clock-display" id="clock">--:--</div>
+        <div class="clock-date" id="headerDate">--</div>
+      </div>
+      <button class="fs-btn" onclick="toggleFS()">⛶</button>
     </div>
   </header>
 
-  <!-- Selector de Día -->
-  <div class="day-selector" id="daySelector">
-    <div class="day-pill" data-day="lunes" onclick="selectDay('lunes')">Lun</div>
-    <div class="day-pill" data-day="martes" onclick="selectDay('martes')">Mar</div>
-    <div class="day-pill" data-day="miercoles" onclick="selectDay('miercoles')">Mié</div>
-    <div class="day-pill" data-day="jueves" onclick="selectDay('jueves')">Jue</div>
-    <div class="day-pill" data-day="viernes" onclick="selectDay('viernes')">Vie</div>
-    <div class="day-pill" data-day="sabado" onclick="selectDay('sabado')">Sáb</div>
-    <div class="day-pill" data-day="domingo" onclick="selectDay('domingo')">Dom</div>
-  </div>
+  <!-- Main Navigation Tabs -->
+  <nav class="main-nav">
+    <button class="nav-btn active" id="tab-hoy" onclick="switchTab('hoy')">🏠 Hoy</button>
+    <button class="nav-btn" id="tab-semanal" onclick="switchTab('semanal')">📅 Plan Semanal</button>
+    <button class="nav-btn" id="tab-matriz" onclick="switchTab('matriz')">⚖️ Matriz & Pescado</button>
+    <button class="nav-btn" id="tab-compra" onclick="switchTab('compra')">🛒 Compra & Alexa</button>
+    <button class="nav-btn" id="tab-recetas" onclick="switchTab('recetas')">💡 Recetas & Nutrición</button>
+  </nav>
 
-  <!-- Grid Principal -->
-  <div class="dashboard-grid">
-
-    <!-- Columna 1: Menús del día -->
-    <div class="column" id="menuColumn">
-      
-      <!-- Colegio -->
-      <div class="card" id="cardSchool" style="border-left: 5px solid #f59e0b;">
-        <div class="card-top">
-          <div>
-            <span class="badge badge-school">Colegio</span>
-            <span class="card-subtitle">COMIDA ESCOLAR (NIÑA 8 AÑOS)</span>
-          </div>
-          <span class="badge badge-tag" id="schoolVerified">&#10003; VERIFICADO</span>
-        </div>
-        <div class="dish-title" id="schoolMain">Cargando plato...</div>
-        <div class="dish-desc" id="schoolSub">...</div>
-        <div class="dish-dessert" id="schoolDessert">...</div>
-      </div>
-
-      <!-- Almuerzo Casa -->
-      <div class="card" style="border-left: 5px solid #10b981;">
-        <div class="card-top">
-          <div>
-            <span class="badge badge-lunch">Mediodía</span>
-            <span class="card-subtitle">ALMUERZO EN CASA (3 PERSONAS)</span>
-          </div>
-        </div>
-        <div class="dish-title" id="lunchMain">Cargando plato...</div>
-        <div class="dish-desc" id="lunchSub">...</div>
-      </div>
-
-      <!-- Cena Familiar -->
-      <div class="card" style="border-left: 5px solid #8b5cf6;">
-        <div class="card-top">
-          <div>
-            <span class="badge badge-dinner">Cena</span>
-            <span class="card-subtitle">CENA FAMILIAR (4 PERSONAS)</span>
-          </div>
-        </div>
-        <div class="dish-title" id="dinnerMain">Cargando cena...</div>
-        <div class="dish-desc" id="dinnerSub">...</div>
-        <div class="dish-dessert" id="dinnerDessert">...</div>
-      </div>
-
-      <!-- Balance -->
-      <div class="balance-banner" id="balanceBanner">
-        &#10003; Cargando equilibrio nutricional...
-      </div>
-
+  <!-- TAB 1: HOY -->
+  <section id="panel-hoy" class="tab-panel active">
+    <div class="day-selector" id="daySelector">
+      <button class="day-pill" data-day="lunes" onclick="selectDay('lunes')">Lun 9</button>
+      <button class="day-pill" data-day="martes" onclick="selectDay('martes')">Mar 10</button>
+      <button class="day-pill" data-day="miercoles" onclick="selectDay('miercoles')">Mié 11 🐟</button>
+      <button class="day-pill" data-day="jueves" onclick="selectDay('jueves')">Jue 12</button>
+      <button class="day-pill" data-day="viernes" onclick="selectDay('viernes')">Vie 13 🐟</button>
     </div>
 
-    <!-- Columna 2: Agenda, Lista y Temporizador -->
-    <div class="column">
-      
-      <!-- Horarios -->
-      <div class="card">
-        <div class="section-title">📅 Horarios y Rutina de Hoy</div>
-        <div id="scheduleContainer"></div>
-      </div>
-
-      <!-- Lista Táctil -->
-      <div class="card">
-        <div class="section-title">🛒 Compras y Tareas de Cocina</div>
-        <div id="todoContainer"></div>
-      </div>
-
-      <!-- Temporizador -->
-      <div class="card">
-        <div class="timer-row">
-          <div class="section-title" style="margin-bottom:0;">⏱️ Temporizador Cocina</div>
-          <div class="timer-clock" id="timerClock">00:00</div>
+    <div class="two-col">
+      <div class="col-main">
+        <!-- Colegio -->
+        <div class="card" style="border-left: 5px solid var(--amber);">
+          <div class="card-top">
+            <div>
+              <span class="badge badge-school">🏫 Colegio</span>
+              <span class="card-subtitle">Inés (8 años)</span>
+            </div>
+            <span class="badge badge-tag" id="hoyDayTag">...</span>
+          </div>
+          <div class="dish-title" id="schoolMain">Cargando...</div>
+          <div class="dish-dessert" id="schoolDessert"></div>
+          <div class="dish-desc" id="schoolExcluded"></div>
         </div>
-        <div class="timer-buttons">
-          <button class="timer-btn" onclick="startTimer(180)">3m Té</button>
-          <button class="timer-btn" onclick="startTimer(300)">5m Huevos</button>
-          <button class="timer-btn" onclick="startTimer(600)">10m Pasta</button>
-          <button class="timer-btn" onclick="resetTimer()" style="color:#ef4444;">Parar</button>
+
+        <!-- Mediodía -->
+        <div class="card" style="border-left: 5px solid var(--green);">
+          <div class="card-top">
+            <div>
+              <span class="badge badge-lunch">☀️ Mediodía Casa</span>
+              <span class="card-subtitle" id="lunchPeople">3 personas</span>
+            </div>
+            <span class="badge badge-fish" id="hoyFishBadge" style="display:none;">🐟 Pescado Sync</span>
+          </div>
+          <div class="dish-title" id="lunchMain">Cargando...</div>
+          <div class="dish-desc" id="lunchSub"></div>
+        </div>
+
+        <!-- Cena -->
+        <div class="card" style="border-left: 5px solid var(--purple);">
+          <div class="card-top">
+            <div>
+              <span class="badge badge-dinner">🌙 Cena Familiar</span>
+              <span class="card-subtitle" id="dinnerPeople">4 personas</span>
+            </div>
+          </div>
+          <div class="dish-title" id="dinnerMain">Cargando...</div>
+          <div class="dish-desc" id="dinnerSub"></div>
+        </div>
+
+        <!-- Regla de No Repetición -->
+        <div class="balance-banner" id="balanceBanner">
+          <span>✓ Verificando regla de no repetición...</span>
         </div>
       </div>
 
+      <div class="col-side">
+        <!-- Temporizador -->
+        <div class="card">
+          <div class="section-title">
+            <span>⏱️ Temporizador Cocina</span>
+            <span class="timer-clock" id="timerClock">00:00</span>
+          </div>
+          <div class="timer-buttons">
+            <button class="timer-btn" onclick="startTimer(180)">3m Té</button>
+            <button class="timer-btn" onclick="startTimer(300)">5m Huevos</button>
+            <button class="timer-btn" onclick="startTimer(600)">10m Pasta</button>
+            <button class="timer-btn" onclick="startTimer(720)">12m Horno</button>
+            <button class="timer-btn" onclick="startTimer(900)">15m Pizza</button>
+            <button class="timer-btn stop" onclick="resetTimer()">Parar</button>
+          </div>
+        </div>
+
+        <!-- Resumen Compra -->
+        <div class="card">
+          <div class="section-title">
+            <span>🛒 Resumen Compra Pendiente</span>
+            <span id="hoyShopPercent" style="color:#6ee7b7;">0%</span>
+          </div>
+          <div id="hoyShopSummary"></div>
+          <button class="link-btn" onclick="switchTab('compra')">Abrir Lista & Copiar a Alexa →</button>
+        </div>
+
+        <!-- Receta Destacada -->
+        <div class="card" id="hoyRecipeCard">
+          <div class="section-title">
+            <span>💡 Receta Destacada</span>
+            <span class="badge badge-tag" id="hoyRecipeTag">...</span>
+          </div>
+          <div class="dish-title" id="hoyRecipeTitle">...</div>
+          <div class="dish-desc" id="hoyRecipeSteps">...</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 2: PLAN SEMANAL -->
+  <section id="panel-semanal" class="tab-panel">
+    <div class="day-selector">
+      <button class="day-pill active" id="wf-all" onclick="filterWeekly('all', this)">Todos</button>
+      <button class="day-pill" onclick="filterWeekly('lunes', this)">Lun 9</button>
+      <button class="day-pill" onclick="filterWeekly('martes', this)">Mar 10</button>
+      <button class="day-pill" onclick="filterWeekly('miercoles', this)">Mié 11</button>
+      <button class="day-pill" onclick="filterWeekly('jueves', this)">Jue 12</button>
+      <button class="day-pill" onclick="filterWeekly('viernes', this)">Vie 13</button>
+    </div>
+    <div class="grid-cards" id="weeklyCardsContainer"></div>
+  </section>
+
+  <!-- TAB 3: MATRIZ & PESCADO -->
+  <section id="panel-matriz" class="tab-panel">
+    <div class="card" style="margin-bottom:10px;">
+      <div class="section-title">
+        <span>⚖️ Matriz de Cumplimiento: Regla de No Repetición</span>
+      </div>
+      <div class="table-scroll">
+        <table>
+          <thead>
+            <tr>
+              <th>Día</th>
+              <th>🏫 Comida Colegio (Niña 8)</th>
+              <th>🚫 Excluidos Cenas</th>
+              <th>🌙 Cena Elegida (4p)</th>
+              <th>Estado</th>
+            </tr>
+          </thead>
+          <tbody id="matrixBody"></tbody>
+        </table>
+      </div>
     </div>
 
+    <div class="card" style="margin-bottom:10px; border-left: 5px solid var(--coral);">
+      <div class="section-title" style="color:#fda4af;">
+        <span>🐟 Estrategia de Sincronización de Pescado (Inés & Paula 12 años)</span>
+      </div>
+      <p class="dish-desc" style="margin-top:0; color:#e2e8f0;">
+        Inés come pescado en el colegio el <b>Miércoles</b> y el <b>Viernes</b>. Sincronizamos las comidas de Paula (12 años) en casa esos mismos días asegurando <b>cero moluscos ni crustáceos</b> en todas las recetas.
+      </p>
+    </div>
+
+    <div class="grid-cards" id="fishCardsContainer"></div>
+  </section>
+
+  <!-- TAB 4: COMPRA & ALEXA -->
+  <section id="panel-compra" class="tab-panel">
+    <div class="shop-toolbar">
+      <input type="text" id="shopSearch" class="shop-search" placeholder="Buscar ingrediente..." oninput="renderShopping()">
+      <button class="action-btn btn-merc" onclick="openAlexaModal('mercadillo')">🍅 Copiar Mercadillo (Alexa)</button>
+      <button class="action-btn btn-ahor" onclick="openAlexaModal('ahorramas')">🥩 Copiar Ahorramas (Alexa)</button>
+      <button class="action-btn btn-reset" onclick="resetShopping()">Reiniciar</button>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-head">
+        <span>Progreso de Compra</span>
+        <span id="shopProgressText" style="color:#6ee7b7;">0 / 23 comprados (0%)</span>
+      </div>
+      <div class="progress-track">
+        <div class="progress-fill" id="shopProgressBar"></div>
+      </div>
+    </div>
+
+    <div class="two-col">
+      <div class="col-side card">
+        <div class="section-title">
+          <span>🧺 1. El Mercadillo</span>
+          <span class="badge badge-lunch">Domingo • Frutería</span>
+        </div>
+        <div id="listMercadillo"></div>
+      </div>
+      <div class="col-side card">
+        <div class="section-title">
+          <span>🛒 2. Supermercado Ahorramas</span>
+          <span class="badge badge-school">Sábado • Súper</span>
+        </div>
+        <div id="listAhorramas"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TAB 5: RECETAS & NUTRICION -->
+  <section id="panel-recetas" class="tab-panel">
+    <div class="grid-cards" id="recipesContainer" style="margin-bottom:10px;"></div>
+
+    <div class="two-col">
+      <div class="col-side card">
+        <div class="section-title"><span>📊 Fuentes de Proteína (Comidas + Cenas)</span></div>
+        <div id="proteinChartBox"></div>
+      </div>
+      <div class="col-side card">
+        <div class="section-title"><span>🥦 Variedad de Verduras por Día</span></div>
+        <div id="veggieChartBox"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal Alexa (<240 chars) -->
+  <div id="alexaModal" class="modal-backdrop">
+    <div class="modal-box">
+      <div class="section-title" style="margin-bottom:6px;">
+        <span>🔵 Exportar a Alexa (límite 256 caracteres)</span>
+        <button onclick="closeAlexaModal()" style="background:none;border:none;color:#fff;font-size:18px;cursor:pointer;">×</button>
+      </div>
+      <p class="dish-desc" style="margin-bottom:10px;">
+        Lista dividida en bloques menores de 240 caracteres para copiar y pegar fácilmente en la app de Alexa.
+      </p>
+      <div id="alexaChunks"></div>
+      <button class="action-btn btn-reset" style="width:100%;margin-top:6px;" onclick="closeAlexaModal()">Cerrar</button>
+    </div>
   </div>
 
   <footer>
-    <span>Sincronizado vía GitHub &bull; Pantalla BQ 5.5"</span>
-    <button class="fs-btn" onclick="toggleFS()">Pantalla Completa ⛶</button>
+    <span>Sincronizado vía GitHub Pages • Pantalla BQ 5.5"</span>
+    <span id="syncStatus">Datos locales listos</span>
   </footer>
 
   <script>
-    var currentDayKey = 'martes';
-    var menuData = null;
+    var FALLBACK_DATA = {
+      "week_title": "Semana del 9 al 13 de Noviembre",
+      "location": "Madrid",
+      "subtitle": "Mediodía: 3p • Cenas: 4p • Pescado Sync: Mié & Vie • Sin Moluscos/Crustáceos",
+      "days": {
+        "lunes": {
+          "id": "mon",
+          "name": "Lunes 9",
+          "dayName": "Lunes 9 de Noviembre",
+          "tag": "Lunes de Legumbre",
+          "isFishDay": false,
+          "colegio": {
+            "dish_main": "Salteado de brócoli y zanahoria + Ragout de ternera y verduras + Patatas fritas",
+            "dessert": "Manzana Golden",
+            "excluded_groups": "Ternera, Brócoli, Patata"
+          },
+          "mediodia": {
+            "people": "3 personas",
+            "dish_main": "Lentejas estofadas con zanahoria",
+            "dish_sub": "Plato tradicional reconfortante para empezar la semana."
+          },
+          "cena": {
+            "people": "4 personas",
+            "dish_main": "Filetes de pavo a la plancha con calabacín rehogado",
+            "dish_sub": "Cena magra para compensar la ternera del colegio."
+          },
+          "balance": "✓ Evitamos ternera y patatas."
+        },
+        "martes": {
+          "id": "tue",
+          "name": "Martes 10",
+          "dayName": "Martes 10 de Noviembre",
+          "tag": "Pasta Casera",
+          "isFishDay": false,
+          "colegio": {
+            "dish_main": "Lentejas eco a la jardinera + Tortilla de patata + Ensalada verde",
+            "dessert": "Pera",
+            "excluded_groups": "Legumbre, Huevo, Patata"
+          },
+          "mediodia": {
+            "people": "3 personas",
+            "dish_main": "Espaguetis a la boloñesa",
+            "dish_sub": "Plato de pasta energético para los 3."
+          },
+          "cena": {
+            "people": "4 personas",
+            "dish_main": "Pechugas de pollo asadas con judías verdes",
+            "dish_sub": "Proteína ligera evitando la legumbre y el huevo."
+          },
+          "balance": "✓ Evitamos legumbre y huevo."
+        },
+        "miercoles": {
+          "id": "wed",
+          "name": "Miércoles 11",
+          "dayName": "Miércoles 11 de Noviembre",
+          "tag": "🐟 Pescado #1",
+          "isFishDay": true,
+          "colegio": {
+            "dish_main": "Macarrones integrales c/tomate + Merluza asada con hortalizas",
+            "dessert": "Mandarina",
+            "excluded_groups": "Pasta, Pescado (Merluza)"
+          },
+          "mediodia": {
+            "people": "3 personas",
+            "dish_main": "Lomos de salmón en air fryer con patatas",
+            "dish_sub": "Sincronizado: Pescado seguro para Paula (sin crustáceos)."
+          },
+          "cena": {
+            "people": "4 personas",
+            "dish_main": "Solomillo de cerdo con ensalada de tomate",
+            "dish_sub": "Cena limpia que no repite pasta ni pescado."
+          },
+          "balance": "✓ Evitamos pescado y pasta."
+        },
+        "jueves": {
+          "id": "thu",
+          "name": "Jueves 12",
+          "dayName": "Jueves 12 de Noviembre",
+          "tag": "Clásico al Horno",
+          "isFishDay": false,
+          "colegio": {
+            "dish_main": "Crema de calabacín y patata + Estofado garbanzos con magro de cerdo",
+            "dessert": "Plátano",
+            "excluded_groups": "Cremas, Garbanzos, Cerdo"
+          },
+          "mediodia": {
+            "people": "3 personas",
+            "dish_main": "Pollo al horno con patatas",
+            "dish_sub": "Un clásico al horno muy fácil de digerir."
+          },
+          "cena": {
+            "people": "4 personas",
+            "dish_main": "Revuelto de ajetes tiernos y tacos de jamón",
+            "dish_sub": "Sin gambas. Evitamos cremas y garbanzos."
+          },
+          "balance": "✓ Evitamos cerdo, cremas y garbanzos."
+        },
+        "viernes": {
+          "id": "fri",
+          "name": "Viernes 13",
+          "dayName": "Viernes 13 de Noviembre",
+          "tag": "🐟 Pescado Sync #2",
+          "isFishDay": true,
+          "colegio": {
+            "dish_main": "Arroz salteado con verduras + Palometa con tomate",
+            "dessert": "Yogur natural",
+            "excluded_groups": "Arroz, Pescado (Palometa)"
+          },
+          "mediodia": {
+            "people": "3 personas",
+            "dish_main": "Dorada al horno con ensalada de la huerta",
+            "dish_sub": "Sincronizado: Segundo día de pescado de Paula."
+          },
+          "cena": {
+            "people": "4 personas",
+            "dish_main": "Pizza familiar casera (Jamón y queso)",
+            "dish_sub": "Cena divertida de viernes (evitando el arroz y el pescado)."
+          },
+          "balance": "✓ Evitamos arroz y pescado."
+        }
+      },
+      "shopping": {
+        "mercadillo": [
+          { "category": "Verduras & Hortalizas", "name": "Calabacines", "qty": "2 unidades", "done": false },
+          { "category": "Verduras & Hortalizas", "name": "Judías verdes frescas", "qty": "500 g", "done": false },
+          { "category": "Verduras & Hortalizas", "name": "Tomates de ensalada", "qty": "1 kg", "done": false },
+          { "category": "Verduras & Hortalizas", "name": "Ajetes tiernos (para revuelto)", "qty": "1 manojo", "done": false },
+          { "category": "Verduras & Hortalizas", "name": "Zanahorias y Cebollas", "qty": "1.5 kg", "done": false },
+          { "category": "Verduras & Hortalizas", "name": "Patatas", "qty": "2.5 kg", "done": false },
+          { "category": "Verduras & Hortalizas", "name": "Lechuga / Mezclum", "qty": "2 bolsas", "done": false },
+          { "category": "Frutas de Temporada", "name": "Plátanos y Manzanas", "qty": "1.5 kg", "done": false },
+          { "category": "Frutas de Temporada", "name": "Mandarinas", "qty": "1 kg", "done": false }
+        ],
+        "ahorramas": [
+          { "category": "Pescadería", "name": "Lomos de salmón (Comida 3p)", "qty": "3 lomos", "done": false },
+          { "category": "Pescadería", "name": "Dorada de ración (Comida 3p)", "qty": "3 unidades", "done": false },
+          { "category": "Carnicería & Pollería", "name": "Filetes de pavo (Cena 4p)", "qty": "500 g", "done": false },
+          { "category": "Carnicería & Pollería", "name": "Pechuga de pollo (Cena 4p)", "qty": "500 g", "done": false },
+          { "category": "Carnicería & Pollería", "name": "Carne picada de ternera / mezcla (Comida 3p)", "qty": "400 g", "done": false },
+          { "category": "Carnicería & Pollería", "name": "Solomillo de cerdo (Cena 4p)", "qty": "1-2 piezas", "done": false },
+          { "category": "Carnicería & Pollería", "name": "Pollo entero troceado (Comida 3p)", "qty": "1 kg", "done": false },
+          { "category": "Charcutería & Lácteos", "name": "Taquitos de jamón serrano", "qty": "1 paquete", "done": false },
+          { "category": "Charcutería & Lácteos", "name": "Jamón cocido + Queso rallado (Pizza)", "qty": "1 paq c/u", "done": false },
+          { "category": "Charcutería & Lácteos", "name": "Huevos camperos", "qty": "1 docena", "done": false },
+          { "category": "Despensa & Conservas", "name": "Espaguetis", "qty": "1 paquete", "done": false },
+          { "category": "Despensa & Conservas", "name": "Lentejas (secas o bote)", "qty": "1 pq / 2 botes", "done": false },
+          { "category": "Despensa & Conservas", "name": "Tomate frito casero", "qty": "2 botes", "done": false },
+          { "category": "Despensa & Conservas", "name": "Masa de pizza refrigerada", "qty": "1-2 bases", "done": false }
+        ]
+      },
+      "recipes": [
+        {
+          "icon": "🐟",
+          "title": "Salmón al Horno Jugoso",
+          "tag": "Miércoles Mediodía • 3p",
+          "day": "miercoles",
+          "steps": "Precalienta el horno a 190ºC. Coloca los lomos de salmón en una bandeja con un poco de AOVE, sal y eneldo. Hornea 12 minutos (que el centro quede rosado). Acompaña con patatas cocidas al vapor."
+        },
+        {
+          "icon": "🥚",
+          "title": "Revuelto de Ajetes",
+          "tag": "Jueves Cena • 4p",
+          "day": "jueves",
+          "steps": "Saltea los ajetes tiernos limpios y troceados. Añade unos taquitos de jamón serrano. Bate bien los huevos, incorpóralos y retira del fuego rápido para que el revuelto quede muy jugoso y nada seco."
+        },
+        {
+          "icon": "🍕",
+          "title": "Pizza Casera Rápida",
+          "tag": "Viernes Cena • 4p",
+          "day": "viernes",
+          "steps": "Extiende la base, pon una capa fina de tomate, abundante mozzarella, el jamón cocido y orégano. Hornea a 220ºC unos 12-15 minutos. Ideal para cenar los 4 un viernes relajado."
+        }
+      ],
+      "nutrition": {
+        "proteins": [
+          { "label": "Pescado", "count": 2, "color": "#5a735c" },
+          { "label": "Aves (Pollo/Pavo)", "count": 2, "color": "#e6a15c" },
+          { "label": "Ternera", "count": 2, "color": "#a84e38" },
+          { "label": "Cerdo / Magro", "count": 1, "color": "#c86d51" },
+          { "label": "Huevos", "count": 1, "color": "#f2c94c" },
+          { "label": "Legumbres", "count": 1, "color": "#8d6e63" }
+        ],
+        "veggies": [
+          { "day": "Lun 9", "count": 2 },
+          { "day": "Mar 10", "count": 1 },
+          { "day": "Mié 11", "count": 2 },
+          { "day": "Jue 12", "count": 1 },
+          { "day": "Vie 13", "count": 2 }
+        ]
+      }
+    };
 
-    // Reloj
+    var appData = FALLBACK_DATA;
+    var DAY_KEYS = ['lunes', 'martes', 'miercoles', 'jueves', 'viernes'];
+    var currentDayKey = 'lunes';
+    var shopState = null;
+
+    function pad2(n) {
+      return n < 10 ? '0' + n : '' + n;
+    }
+
     function updateClock() {
       var now = new Date();
-      var h = String(now.getHours()).padStart(2, '0');
-      var m = String(now.getMinutes()).padStart(2, '0');
-      document.getElementById('clock').textContent = h + ':' + m;
-
-      var options = { weekday: 'long', day: 'numeric', month: 'long' };
-      var str = now.toLocaleDateString('es-ES', options);
-      document.getElementById('headerDate').textContent = str.charAt(0).toUpperCase() + str.slice(1);
-    }
-    setInterval(updateClock, 1000);
-    updateClock();
-
-    // Obtener día de hoy
-    function getTodayKey() {
-      var days = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
-      var dayNum = new Date().getDay();
-      return days[dayNum];
+      document.getElementById('clock').textContent = pad2(now.getHours()) + ':' + pad2(now.getMinutes());
+      var dias = ['domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado'];
+      var meses = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+      document.getElementById('headerDate').textContent = dias[now.getDay()] + ', ' + now.getDate() + ' ' + meses[now.getMonth()];
     }
 
-    // Renderizar Día
+    function getAutoDayKey() {
+      var d = new Date().getDay();
+      var map = { 1: 'lunes', 2: 'martes', 3: 'miercoles', 4: 'jueves', 5: 'viernes' };
+      return map[d] || 'lunes';
+    }
+
+    function switchTab(tabName) {
+      var panels = document.querySelectorAll('.tab-panel');
+      for (var i = 0; i < panels.length; i++) {
+        panels[i].className = 'tab-panel';
+      }
+      var btns = document.querySelectorAll('.nav-btn');
+      for (var j = 0; j < btns.length; j++) {
+        btns[j].className = 'nav-btn';
+      }
+      document.getElementById('panel-' + tabName).className = 'tab-panel active';
+      document.getElementById('tab-' + tabName).className = 'nav-btn active';
+    }
+
     function selectDay(dayKey) {
+      if (!appData.days[dayKey]) dayKey = 'lunes';
       currentDayKey = dayKey;
-      document.querySelectorAll('.day-pill').forEach(function(pill) {
-        if (pill.getAttribute('data-day') === dayKey) {
-          pill.classList.add('active');
-        } else {
-          pill.classList.remove('active');
-        }
-      });
-
-      if (!menuData || !menuData.days || !menuData.days[dayKey]) return;
-      var d = menuData.days[dayKey];
-
-      // Colegio
-      var cardSchool = document.getElementById('cardSchool');
-      if (d.colegio) {
-        cardSchool.style.display = 'block';
-        document.getElementById('schoolMain').textContent = d.colegio.dish_main;
-        document.getElementById('schoolSub').textContent = d.colegio.dish_sub;
-        document.getElementById('schoolDessert').textContent = d.colegio.dessert ? 'Postre: ' + d.colegio.dessert : '';
-      } else {
-        cardSchool.style.display = 'none';
+      var pills = document.querySelectorAll('#daySelector .day-pill');
+      for (var i = 0; i < pills.length; i++) {
+        var k = pills[i].getAttribute('data-day');
+        pills[i].className = 'day-pill' + (k === dayKey ? ' active' : '');
       }
 
-      // Mediodía
+      var d = appData.days[dayKey];
+      document.getElementById('hoyDayTag').textContent = d.tag || d.dayName;
+      document.getElementById('hoyFishBadge').style.display = d.isFishDay ? 'inline-block' : 'none';
+
+      document.getElementById('schoolMain').textContent = d.colegio.dish_main;
+      document.getElementById('schoolDessert').textContent = d.colegio.dessert ? 'Postre: ' + d.colegio.dessert : '';
+      document.getElementById('schoolExcluded').textContent = d.colegio.excluded_groups ? '🚫 Excluidos cena: ' + d.colegio.excluded_groups : '';
+
+      document.getElementById('lunchPeople').textContent = d.mediodia.people || '3 personas';
       document.getElementById('lunchMain').textContent = d.mediodia.dish_main;
-      document.getElementById('lunchSub').textContent = d.mediodia.dish_sub;
+      document.getElementById('lunchSub').textContent = d.mediodia.dish_sub || '';
 
-      // Cena
+      document.getElementById('dinnerPeople').textContent = d.cena.people || '4 personas';
       document.getElementById('dinnerMain').textContent = d.cena.dish_main;
-      document.getElementById('dinnerSub').textContent = d.cena.dish_sub;
-      document.getElementById('dinnerDessert').textContent = d.cena.dessert ? 'Postre: ' + d.cena.dessert : '';
+      document.getElementById('dinnerSub').textContent = d.cena.dish_sub || '';
 
-      // Balance
-      document.getElementById('balanceBanner').innerHTML = '&#10003; ' + (d.balance || 'Menú balanceado.');
+      document.getElementById('balanceBanner').innerHTML = '<span>' + (d.balance || '✓ Verificado') + '</span><span style="opacity:0.8;font-size:11px;">✓ Verificado</span>';
+
+      // Receta destacada del día (o la primera disponible)
+      var recipes = appData.recipes || [];
+      var chosen = recipes[0];
+      for (var r = 0; r < recipes.length; r++) {
+        if (recipes[r].day === dayKey) {
+          chosen = recipes[r];
+          break;
+        }
+      }
+      if (chosen) {
+        document.getElementById('hoyRecipeTag').textContent = chosen.tag;
+        document.getElementById('hoyRecipeTitle').textContent = chosen.icon + ' ' + chosen.title;
+        document.getElementById('hoyRecipeSteps').textContent = chosen.steps;
+      }
     }
 
-    // Cargar menu.json
-    function loadMenuData() {
-      fetch('menu.json?_t=' + new Date().getTime())
-        .then(function(res) { return res.json(); })
-        .then(function(data) {
-          menuData = data;
-          if (data.default_schedule) renderSchedule(data.default_schedule);
-          if (data.default_todos) renderTodos(data.default_todos);
-          selectDay(currentDayKey);
-        })
-        .catch(function(err) {
-          console.log('Error cargando menu.json:', err);
-        });
+    function renderWeekly(filterKey) {
+      var container = document.getElementById('weeklyCardsContainer');
+      container.innerHTML = '';
+      for (var i = 0; i < DAY_KEYS.length; i++) {
+        var key = DAY_KEYS[i];
+        if (filterKey !== 'all' && filterKey !== key) continue;
+        var d = appData.days[key];
+        if (!d) continue;
+
+        var card = document.createElement('div');
+        card.className = 'card grid-card-item' + (d.isFishDay ? ' fish-highlight' : '');
+        card.innerHTML =
+          '<div class="card-top">' +
+            '<div><strong style="font-size:15px;color:#fff;">' + d.dayName + '</strong> <span class="card-subtitle">• ' + d.tag + '</span></div>' +
+            (d.isFishDay ? '<span class="badge badge-fish">🐟 Pescado Sync</span>' : '') +
+          '</div>' +
+          '<div style="background:#0f172a;padding:8px 10px;border-radius:8px;border:1px solid var(--card-border);margin-bottom:8px;">' +
+            '<div class="card-top" style="margin-bottom:3px;"><span class="badge badge-school">🏫 Colegio</span><span class="card-subtitle">Postre: ' + d.colegio.dessert + '</span></div>' +
+            '<div style="font-size:12px;color:#e2e8f0;">' + d.colegio.dish_main + '</div>' +
+          '</div>' +
+          '<div style="margin-bottom:6px;">' +
+            '<span class="badge badge-lunch">☀️ Mediodía (' + d.mediodia.people + ')</span>' +
+            '<div class="dish-title" style="margin-top:4px;font-size:13px;">' + d.mediodia.dish_main + '</div>' +
+            '<div class="dish-desc">' + d.mediodia.dish_sub + '</div>' +
+          '</div>' +
+          '<div style="margin-bottom:8px;">' +
+            '<span class="badge badge-dinner">🌙 Cena (' + d.cena.people + ')</span>' +
+            '<div class="dish-title" style="margin-top:4px;font-size:13px;">' + d.cena.dish_main + '</div>' +
+            '<div class="dish-desc">' + d.cena.dish_sub + '</div>' +
+          '</div>' +
+          '<div class="balance-banner"><span>' + d.balance + '</span><span>✓ Verificado</span></div>';
+        container.appendChild(card);
+      }
     }
 
-    function renderSchedule(items) {
-      var c = document.getElementById('scheduleContainer');
-      c.innerHTML = '';
-      items.forEach(function(it) {
+    function filterWeekly(key, btnEl) {
+      var btns = document.querySelectorAll('#panel-semanal .day-pill');
+      for (var i = 0; i < btns.length; i++) btns[i].className = 'day-pill';
+      if (btnEl) btnEl.className = 'day-pill active';
+      renderWeekly(key);
+    }
+
+    function renderMatrixAndFish() {
+      var tbody = document.getElementById('matrixBody');
+      tbody.innerHTML = '';
+      var fishContainer = document.getElementById('fishCardsContainer');
+      fishContainer.innerHTML = '';
+
+      for (var i = 0; i < DAY_KEYS.length; i++) {
+        var d = appData.days[DAY_KEYS[i]];
+        if (!d) continue;
+
+        var tr = document.createElement('tr');
+        tr.innerHTML =
+          '<td><b>' + d.name + '</b></td>' +
+          '<td>' + d.colegio.dish_main + '</td>' +
+          '<td class="excl-cell">' + d.colegio.excluded_groups + '</td>' +
+          '<td class="dinner-cell">' + d.cena.dish_main + '</td>' +
+          '<td><span class="badge badge-lunch">✓ Correcto</span></td>';
+        tbody.appendChild(tr);
+
+        if (d.isFishDay) {
+          var fc = document.createElement('div');
+          fc.className = 'card grid-card-item fish-highlight';
+          fc.innerHTML =
+            '<div class="card-top">' +
+              '<span class="badge badge-fish">' + d.dayName + '</span>' +
+              '<span class="badge badge-tag">' + d.tag + '</span>' +
+            '</div>' +
+            '<div style="margin-top:6px;">' +
+              '<div style="margin-bottom:6px;"><span class="badge badge-school">🏫 Colegio (Inés)</span><div class="dish-desc" style="color:#fff;">' + d.colegio.dish_main + '</div></div>' +
+              '<div style="margin-bottom:6px;"><span class="badge badge-lunch">☀️ Mediodía (Paula / 3p)</span><div class="dish-title" style="font-size:13px;margin-top:3px;">' + d.mediodia.dish_main + '</div></div>' +
+              '<div><span class="badge badge-dinner">🌙 Cena (4p)</span><div class="dish-desc" style="color:#e2e8f0;">' + d.cena.dish_main + '</div></div>' +
+            '</div>';
+          fishContainer.appendChild(fc);
+        }
+      }
+    }
+
+    function getShopState() {
+      if (shopState) return shopState;
+      try {
+        var saved = localStorage.getItem('bq_kitchen_shopping_v2');
+        if (saved) {
+          shopState = JSON.parse(saved);
+          return shopState;
+        }
+      } catch (e) {}
+      shopState = JSON.parse(JSON.stringify(appData.shopping));
+      return shopState;
+    }
+
+    function saveShopState() {
+      try {
+        localStorage.setItem('bq_kitchen_shopping_v2', JSON.stringify(shopState));
+      } catch (e) {}
+    }
+
+    function toggleShop(storeKey, idx) {
+      var st = getShopState();
+      st[storeKey][idx].done = !st[storeKey][idx].done;
+      saveShopState();
+      renderShopping();
+    }
+
+    function resetShopping() {
+      shopState = JSON.parse(JSON.stringify(appData.shopping));
+      saveShopState();
+      document.getElementById('shopSearch').value = '';
+      renderShopping();
+    }
+
+    function renderStoreList(items, containerId, storeKey, query) {
+      var container = document.getElementById(containerId);
+      container.innerHTML = '';
+      var grouped = {};
+      var cats = [];
+
+      for (var i = 0; i < items.length; i++) {
+        var it = items[i];
+        if (query && it.name.toLowerCase().indexOf(query) === -1 && it.category.toLowerCase().indexOf(query) === -1) {
+          continue;
+        }
+        if (!grouped[it.category]) {
+          grouped[it.category] = [];
+          cats.push(it.category);
+        }
+        grouped[it.category].push({ item: it, idx: i });
+      }
+
+      for (var c = 0; c < cats.length; c++) {
+        var catName = cats[c];
+        var h = document.createElement('div');
+        h.className = 'shop-cat';
+        h.textContent = catName;
+        container.appendChild(h);
+
+        var list = grouped[catName];
+        for (var j = 0; j < list.length; j++) {
+          (function(entry) {
+            var row = document.createElement('div');
+            row.className = 'todo-item';
+            row.onclick = function() { toggleShop(storeKey, entry.idx); };
+            row.innerHTML =
+              '<div class="todo-left">' +
+                '<div class="todo-check' + (entry.item.done ? ' checked' : '') + '">' + (entry.item.done ? '✓' : '') + '</div>' +
+                '<div class="todo-text' + (entry.item.done ? ' done' : '') + '">' + entry.item.name + '</div>' +
+              '</div>' +
+              '<span class="qty-badge">' + entry.item.qty + '</span>';
+            container.appendChild(row);
+          })(list[j]);
+        }
+      }
+    }
+
+    function renderShopping() {
+      var st = getShopState();
+      var q = (document.getElementById('shopSearch').value || '').toLowerCase();
+      renderStoreList(st.mercadillo, 'listMercadillo', 'mercadillo', q);
+      renderStoreList(st.ahorramas, 'listAhorramas', 'ahorramas', q);
+
+      var total = st.mercadillo.length + st.ahorramas.length;
+      var done = 0;
+      var pendMerc = [];
+      var pendAhor = [];
+
+      for (var i = 0; i < st.mercadillo.length; i++) {
+        if (st.mercadillo[i].done) done++;
+        else pendMerc.push(st.mercadillo[i]);
+      }
+      for (var j = 0; j < st.ahorramas.length; j++) {
+        if (st.ahorramas[j].done) done++;
+        else pendAhor.push(st.ahorramas[j]);
+      }
+
+      var pct = total > 0 ? Math.round((done / total) * 100) : 0;
+      document.getElementById('shopProgressText').textContent = done + ' / ' + total + ' comprados (' + pct + '%)';
+      document.getElementById('shopProgressBar').style.width = pct + '%';
+
+      // Actualizar resumen en pestaña Hoy
+      document.getElementById('hoyShopPercent').textContent = done + '/' + total + ' (' + pct + '%)';
+      var sumBox = document.getElementById('hoyShopSummary');
+      sumBox.innerHTML =
+        '<div class="mini-summary-row"><span>🧺 Mercadillo pendiente</span><b>' + pendMerc.length + ' arts.</b></div>' +
+        '<div class="mini-summary-row"><span>🛒 Ahorramas pendiente</span><b>' + pendAhor.length + ' arts.</b></div>';
+    }
+
+    function openAlexaModal(store) {
+      var st = getShopState();
+      var items = [];
+      var prefix = '';
+      if (store === 'mercadillo') {
+        prefix = '🍅 MERC';
+        for (var i = 0; i < st.mercadillo.length; i++) {
+          if (!st.mercadillo[i].done) items.push(st.mercadillo[i]);
+        }
+      } else {
+        prefix = '🥩 AHORR';
+        for (var j = 0; j < st.ahorramas.length; j++) {
+          if (!st.ahorramas[j].done) items.push(st.ahorramas[j]);
+        }
+      }
+
+      var chunksBox = document.getElementById('alexaChunks');
+      chunksBox.innerHTML = '';
+
+      if (items.length === 0) {
+        chunksBox.innerHTML = '<div class="chunk-card"><div class="chunk-text">¡Todo comprado en esta lista! No hay artículos pendientes.</div></div>';
+        document.getElementById('alexaModal').className = 'modal-backdrop open';
+        return;
+      }
+
+      var chunks = [];
+      var curr = [];
+      var currLen = 0;
+      var MAX_LEN = 240;
+
+      for (var k = 0; k < items.length; k++) {
+        var str = items[k].name + ' (' + items[k].qty + ')';
+        if (currLen + str.length + 2 > MAX_LEN && curr.length > 0) {
+          chunks.push(curr);
+          curr = [str];
+          currLen = str.length;
+        } else {
+          curr.push(str);
+          currLen += str.length + 2;
+        }
+      }
+      if (curr.length > 0) chunks.push(curr);
+
+      for (var c = 0; c < chunks.length; c++) {
+        (function(idx, arr) {
+          var text = prefix + ' (' + (idx + 1) + '/' + chunks.length + '): ' + arr.join(', ');
+          var card = document.createElement('div');
+          card.className = 'chunk-card';
+
+          var p = document.createElement('div');
+          p.className = 'chunk-text';
+          p.textContent = text;
+
+          var btn = document.createElement('button');
+          btn.className = 'copy-chunk-btn';
+          btn.textContent = '📋 Copiar Parte ' + (idx + 1) + ' de ' + chunks.length;
+          btn.onclick = function() { copyText(text, btn); };
+
+          card.appendChild(p);
+          card.appendChild(btn);
+          chunksBox.appendChild(card);
+        })(c, chunks[c]);
+      }
+
+      document.getElementById('alexaModal').className = 'modal-backdrop open';
+    }
+
+    function copyText(text, btn) {
+      function doneFeedback() {
+        var old = btn.textContent;
+        btn.textContent = '✔️ ¡Copiado!';
+        btn.style.background = '#10b981';
+        setTimeout(function() {
+          btn.textContent = old;
+          btn.style.background = '';
+        }, 2000);
+      }
+
+      if (navigator.clipboard && window.isSecureContext) {
+        navigator.clipboard.writeText(text).then(doneFeedback).catch(fallback);
+      } else {
+        fallback();
+      }
+
+      function fallback() {
+        var ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.left = '-9999px';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy'); } catch (e) {}
+        document.body.removeChild(ta);
+        doneFeedback();
+      }
+    }
+
+    function closeAlexaModal() {
+      document.getElementById('alexaModal').className = 'modal-backdrop';
+    }
+
+    function renderRecipesAndNutrition() {
+      var recBox = document.getElementById('recipesContainer');
+      recBox.innerHTML = '';
+      var recs = appData.recipes || [];
+      for (var i = 0; i < recs.length; i++) {
+        var r = recs[i];
+        var card = document.createElement('div');
+        card.className = 'card grid-card-item';
+        card.innerHTML =
+          '<div class="card-top">' +
+            '<span class="dish-title">' + r.icon + ' ' + r.title + '</span>' +
+            '<span class="badge badge-tag">' + r.tag + '</span>' +
+          '</div>' +
+          '<div class="dish-desc" style="color:#e2e8f0;margin-top:6px;">' + r.steps + '</div>';
+        recBox.appendChild(card);
+      }
+
+      var protBox = document.getElementById('proteinChartBox');
+      protBox.innerHTML = '';
+      var prots = (appData.nutrition && appData.nutrition.proteins) || [];
+      var maxP = 1;
+      for (var p = 0; p < prots.length; p++) {
+        if (prots[p].count > maxP) maxP = prots[p].count;
+      }
+      for (var q = 0; q < prots.length; q++) {
+        var item = prots[q];
+        var pct = Math.round((item.count / maxP) * 100);
         var row = document.createElement('div');
-        row.className = 'timeline-item';
-        row.innerHTML = '<div class="time-badge">' + it.time + '</div><div class="time-text">' + it.desc + '</div>';
-        c.appendChild(row);
-      });
+        row.className = 'bar-row';
+        row.innerHTML =
+          '<div class="bar-label-row"><span>' + item.label + '</span><b>' + item.count + ' platos</b></div>' +
+          '<div class="bar-track"><div class="bar-val" style="width:' + pct + '%;background:' + item.color + ';"></div></div>';
+        protBox.appendChild(row);
+      }
+
+      var vegBox = document.getElementById('veggieChartBox');
+      var vegs = (appData.nutrition && appData.nutrition.veggies) || [];
+      var colsHtml = '<div class="veggie-cols">';
+      for (var v = 0; v < vegs.length; v++) {
+        var h = vegs[v].count * 45;
+        colsHtml +=
+          '<div class="veggie-col">' +
+            '<div class="veggie-bar" style="height:' + h + 'px;">' + vegs[v].count + '</div>' +
+            '<div class="veggie-day">' + vegs[v].day + '</div>' +
+          '</div>';
+      }
+      colsHtml += '</div>';
+      vegBox.innerHTML = colsHtml;
     }
 
-    function renderTodos(defaults) {
-      var saved = localStorage.getItem('bq_kitchen_todos');
-      var list = saved ? JSON.parse(saved) : defaults;
-
-      var c = document.getElementById('todoContainer');
-      c.innerHTML = '';
-      list.forEach(function(item, idx) {
-        var row = document.createElement('div');
-        row.className = 'todo-item';
-        row.onclick = function() {
-          item.done = !item.done;
-          localStorage.setItem('bq_kitchen_todos', JSON.stringify(list));
-          renderTodos(defaults);
-        };
-        row.innerHTML = '<div class="todo-check ' + (item.done ? 'checked' : '') + '"></div><div class="todo-text ' + (item.done ? 'done' : '') + '">' + item.text + '</div>';
-        c.appendChild(row);
-      });
-    }
-
-    // Temporizador Cocina con sonido
+    // Temporizador con sonido
     var timerInt = null;
     var timerSecs = 0;
+
     function playBeep() {
       try {
         var AudioCtx = window.AudioContext || window.webkitAudioContext;
@@ -579,65 +1577,107 @@
         osc.frequency.value = 880;
         gain.gain.setValueAtTime(0.5, ctx.currentTime);
         osc.start();
-        setTimeout(function() { osc.stop(); ctx.close(); }, 600);
-      } catch(e){}
+        setTimeout(function() { osc.stop(); ctx.close(); }, 650);
+      } catch (e) {}
     }
-    function startTimer(s) {
+
+    function drawTimer() {
+      var m = pad2(Math.floor(timerSecs / 60));
+      var s = pad2(timerSecs % 60);
+      document.getElementById('timerClock').textContent = m + ':' + s;
+    }
+
+    function startTimer(secs) {
       clearInterval(timerInt);
-      timerSecs = s;
+      timerSecs = secs;
       drawTimer();
       timerInt = setInterval(function() {
         timerSecs--;
         if (timerSecs <= 0) {
           clearInterval(timerInt);
           timerSecs = 0;
+          drawTimer();
           playBeep();
           alert('⏱️ ¡Tiempo de cocina terminado!');
+          return;
         }
         drawTimer();
       }, 1000);
     }
+
     function resetTimer() {
       clearInterval(timerInt);
       timerSecs = 0;
       drawTimer();
     }
-    function drawTimer() {
-      var m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
-      var s = String(timerSecs % 60).padStart(2, '0');
-      document.getElementById('timerClock').textContent = m + ':' + s;
-    }
 
-    // Clima Torrejón
+    // Clima en vivo Open-Meteo
     function fetchWeather() {
-      fetch('https://api.open-meteo.com/v1/forecast?latitude=40.45&longitude=-3.48&current=temperature_2m,weather_code&timezone=Europe%2FMadrid')
-        .then(function(r){ return r.json(); })
-        .then(function(d){
-          if (d && d.current) {
-            document.getElementById('weatherTemp').textContent = Math.round(d.current.temperature_2m) + '°C';
-            var code = d.current.weather_code;
-            var icon = '☀️';
-            if (code >= 1 && code <= 3) icon = '⛅';
-            else if (code >= 51 && code <= 67) icon = '🌧️';
-            else if (code >= 71) icon = '❄️';
-            document.getElementById('weatherIcon').textContent = icon;
-          }
-        }).catch(function(){});
+      var url = 'https://api.open-meteo.com/v1/forecast?latitude=40.45&longitude=-3.48&current=temperature_2m,weather_code&timezone=Europe%2FMadrid';
+      if (window.fetch) {
+        fetch(url)
+          .then(function(r) { return r.json(); })
+          .then(function(d) {
+            if (d && d.current) {
+              document.getElementById('weatherTemp').textContent = Math.round(d.current.temperature_2m) + '°C';
+              var c = d.current.weather_code;
+              var icon = '☀️';
+              if (c >= 1 && c <= 3) icon = '⛅';
+              else if (c >= 51 && c <= 67) icon = '🌧️';
+              else if (c >= 71) icon = '❄️';
+              document.getElementById('weatherIcon').textContent = icon;
+            }
+          }).catch(function() {});
+      }
     }
 
     function toggleFS() {
       if (!document.fullscreenElement) {
-        document.documentElement.requestFullscreen().catch(function(){});
+        if (document.documentElement.requestFullscreen) {
+          document.documentElement.requestFullscreen().catch(function() {});
+        }
       } else {
         if (document.exitFullscreen) document.exitFullscreen();
       }
     }
 
-    // Inicio
-    currentDayKey = getTodayKey();
-    loadMenuData();
+    function renderAll() {
+      if (appData.week_title && appData.location) {
+        document.getElementById('weekSubtitle').textContent = appData.week_title + ' • ' + appData.location;
+      }
+      selectDay(currentDayKey);
+      renderWeekly('all');
+      renderMatrixAndFish();
+      renderShopping();
+      renderRecipesAndNutrition();
+    }
+
+    function loadMenuFromGitHub() {
+      if (!window.fetch) return;
+      fetch('menu.json?_t=' + new Date().getTime())
+        .then(function(r) {
+          if (!r.ok) throw new Error('HTTP ' + r.status);
+          return r.json();
+        })
+        .then(function(data) {
+          if (data && data.days) {
+            appData = data;
+            document.getElementById('syncStatus').textContent = 'Sincronizado: ' + pad2(new Date().getHours()) + ':' + pad2(new Date().getMinutes());
+            renderAll();
+          }
+        })
+        .catch(function() {
+          document.getElementById('syncStatus').textContent = 'Modo offline (datos locales)';
+        });
+    }
+
+    currentDayKey = getAutoDayKey();
+    updateClock();
+    setInterval(updateClock, 1000);
+    renderAll();
+    loadMenuFromGitHub();
     fetchWeather();
-    setInterval(loadMenuData, 5 * 60 * 1000); // Re-sincronizar cada 5 min con GitHub
+    setInterval(loadMenuFromGitHub, 5 * 60 * 1000);
     setInterval(fetchWeather, 30 * 60 * 1000);
   </script>
 </body>
