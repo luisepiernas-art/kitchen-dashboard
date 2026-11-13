@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#0f172a">
+  <title>Kitchen Smart Dashboard</title>
+  <style>
+    :root {
+      --bg: #0b1120;
+      --card-bg: #1e293b;
+      --card-border: #334155;
+      --text: #f8fafc;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-school: #f59e0b;
+      --accent-lunch: #10b981;
+      --accent-dinner: #8b5cf6;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      -webkit-tap-highlight-color: transparent;
+      user-select: none;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+      overflow-x: hidden;
+    }
+
+    /* Top Bar */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      padding: 10px 14px;
+      border-radius: 12px;
+      margin-bottom: 10px;
+    }
+
+    .header-left h1 {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fff;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .header-left .sub {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 2px;
+    }
+
+    .header-right {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .weather-pill {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(56, 189, 248, 0.1);
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      padding: 5px 10px;
+      border-radius: 18px;
+    }
+
+    .weather-temp {
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--accent);
+    }
+
+    .clock-display {
+      font-size: 24px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      color: #fff;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Day Selector Pills */
+    .day-selector {
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      margin-bottom: 10px;
+      padding-bottom: 2px;
+    }
+
+    .day-pill {
+      flex: 1;
+      text-align: center;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 7px 4px;
+      border-radius: 8px;
+      font-size: 12px;
+      font-weight: 700;
+      cursor: pointer;
+      text-transform: capitalize;
+    }
+
+    .day-pill.active {
+      background: var(--accent);
+      color: #0b1120;
+      border-color: var(--accent);
+      box-shadow: 0 0 10px rgba(56, 189, 248, 0.4);
+    }
+
+    /* Grid Layout */
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 10px;
+      flex: 1;
+    }
+
+    @media (max-width: 680px) {
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .column {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      padding: 12px 14px;
+      position: relative;
+    }
+
+    .card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+
+    .badge {
+      font-size: 10px;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 2px 7px;
+      border-radius: 5px;
+      letter-spacing: 0.5px;
+    }
+
+    .badge-school { background: rgba(245, 158, 11, 0.2); color: #fbbf24; border: 1px solid rgba(245, 158, 11, 0.4); }
+    .badge-lunch  { background: rgba(16, 185, 129, 0.2); color: #34d399; border: 1px solid rgba(16, 185, 129, 0.4); }
+    .badge-dinner { background: rgba(139, 92, 246, 0.2); color: #a78bfa; border: 1px solid rgba(139, 92, 246, 0.4); }
+    .badge-tag    { background: rgba(255, 255, 255, 0.1); color: var(--text-muted); font-size: 10px; }
+
+    .card-subtitle {
+      font-size: 11px;
+      color: var(--text-muted);
+      font-weight: 600;
+      margin-left: 6px;
+    }
+
+    .dish-title {
+      font-size: 14px;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.3;
+    }
+
+    .dish-desc {
+      font-size: 11px;
+      color: var(--text-muted);
+      margin-top: 3px;
+      line-height: 1.3;
+    }
+
+    .dish-dessert {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-top: 4px;
+    }
+
+    .balance-banner {
+      background: linear-gradient(90deg, rgba(16, 185, 129, 0.15), rgba(56, 189, 248, 0.1));
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      padding: 8px 12px;
+      border-radius: 8px;
+      font-size: 11px;
+      color: #6ee7b7;
+      font-weight: 600;
+    }
+
+    .section-title {
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    /* Timeline */
+    .timeline-item {
+      display: flex;
+      align-items: center;
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    .timeline-item:last-child { border-bottom: none; }
+
+    .time-badge {
+      background: #0b1120;
+      border: 1px solid var(--card-border);
+      color: var(--accent);
+      font-weight: 800;
+      font-size: 11px;
+      padding: 3px 6px;
+      border-radius: 5px;
+      min-width: 48px;
+      text-align: center;
+      margin-right: 10px;
+    }
+
+    .time-text {
+      font-size: 12px;
+      font-weight: 600;
+    }
+
+    /* Checklist */
+    .todo-item {
+      display: flex;
+      align-items: center;
+      padding: 7px 8px;
+      background: rgba(11, 17, 32, 0.5);
+      border: 1px solid var(--card-border);
+      border-radius: 7px;
+      margin-bottom: 6px;
+      cursor: pointer;
+    }
+
+    .todo-check {
+      width: 18px;
+      height: 18px;
+      border: 2px solid var(--accent);
+      border-radius: 4px;
+      margin-right: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .todo-check.checked { background: var(--accent); }
+    .todo-check.checked::after { content: '✔'; font-size: 11px; color: #0b1120; font-weight: 900; }
+
+    .todo-text { font-size: 12px; flex: 1; }
+    .todo-text.done { text-decoration: line-through; color: var(--text-muted); }
+
+    /* Timer */
+    .timer-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 8px;
+    }
+
+    .timer-clock {
+      font-size: 18px;
+      font-weight: 800;
+      color: #fbbf24;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .timer-buttons {
+      display: flex;
+      gap: 6px;
+    }
+
+    .timer-btn {
+      background: #0b1120;
+      border: 1px solid var(--card-border);
+      color: #fff;
+      font-weight: 700;
+      font-size: 11px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      cursor: pointer;
+      flex: 1;
+    }
+
+    .timer-btn:active { background: var(--accent); color: #000; }
+
+    /* Footer */
+    footer {
+      margin-top: 8px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 10px;
+      color: var(--text-muted);
+    }
+
+    .fs-btn {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      padding: 3px 8px;
+      border-radius: 5px;
+      font-size: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="header-left">
+      <h1 id="headerDate">Cargando fecha...</h1>
+      <div class="sub">Torrejón de Ardoz &bull; Dashboard Familiar &bull; BQ 5.5"</div>
+    </div>
+    <div class="header-right">
+      <div class="weather-pill">
+        <span id="weatherIcon" style="font-size:16px;">⛅</span>
+        <div>
+          <div class="weather-temp" id="weatherTemp">--°C</div>
+        </div>
+      </div>
+      <div class="clock-display" id="clock">--:--</div>
+    </div>
+  </header>
+
+  <!-- Selector de Día -->
+  <div class="day-selector" id="daySelector">
+    <div class="day-pill" data-day="lunes" onclick="selectDay('lunes')">Lun</div>
+    <div class="day-pill" data-day="martes" onclick="selectDay('martes')">Mar</div>
+    <div class="day-pill" data-day="miercoles" onclick="selectDay('miercoles')">Mié</div>
+    <div class="day-pill" data-day="jueves" onclick="selectDay('jueves')">Jue</div>
+    <div class="day-pill" data-day="viernes" onclick="selectDay('viernes')">Vie</div>
+    <div class="day-pill" data-day="sabado" onclick="selectDay('sabado')">Sáb</div>
+    <div class="day-pill" data-day="domingo" onclick="selectDay('domingo')">Dom</div>
+  </div>
+
+  <!-- Grid Principal -->
+  <div class="dashboard-grid">
+
+    <!-- Columna 1: Menús del día -->
+    <div class="column" id="menuColumn">
+      
+      <!-- Colegio -->
+      <div class="card" id="cardSchool" style="border-left: 5px solid #f59e0b;">
+        <div class="card-top">
+          <div>
+            <span class="badge badge-school">Colegio</span>
+            <span class="card-subtitle">COMIDA ESCOLAR (NIÑA 8 AÑOS)</span>
+          </div>
+          <span class="badge badge-tag" id="schoolVerified">&#10003; VERIFICADO</span>
+        </div>
+        <div class="dish-title" id="schoolMain">Cargando plato...</div>
+        <div class="dish-desc" id="schoolSub">...</div>
+        <div class="dish-dessert" id="schoolDessert">...</div>
+      </div>
+
+      <!-- Almuerzo Casa -->
+      <div class="card" style="border-left: 5px solid #10b981;">
+        <div class="card-top">
+          <div>
+            <span class="badge badge-lunch">Mediodía</span>
+            <span class="card-subtitle">ALMUERZO EN CASA (3 PERSONAS)</span>
+          </div>
+        </div>
+        <div class="dish-title" id="lunchMain">Cargando plato...</div>
+        <div class="dish-desc" id="lunchSub">...</div>
+      </div>
+
+      <!-- Cena Familiar -->
+      <div class="card" style="border-left: 5px solid #8b5cf6;">
+        <div class="card-top">
+          <div>
+            <span class="badge badge-dinner">Cena</span>
+            <span class="card-subtitle">CENA FAMILIAR (4 PERSONAS)</span>
+          </div>
+        </div>
+        <div class="dish-title" id="dinnerMain">Cargando cena...</div>
+        <div class="dish-desc" id="dinnerSub">...</div>
+        <div class="dish-dessert" id="dinnerDessert">...</div>
+      </div>
+
+      <!-- Balance -->
+      <div class="balance-banner" id="balanceBanner">
+        &#10003; Cargando equilibrio nutricional...
+      </div>
+
+    </div>
+
+    <!-- Columna 2: Agenda, Lista y Temporizador -->
+    <div class="column">
+      
+      <!-- Horarios -->
+      <div class="card">
+        <div class="section-title">📅 Horarios y Rutina de Hoy</div>
+        <div id="scheduleContainer"></div>
+      </div>
+
+      <!-- Lista Táctil -->
+      <div class="card">
+        <div class="section-title">🛒 Compras y Tareas de Cocina</div>
+        <div id="todoContainer"></div>
+      </div>
+
+      <!-- Temporizador -->
+      <div class="card">
+        <div class="timer-row">
+          <div class="section-title" style="margin-bottom:0;">⏱️ Temporizador Cocina</div>
+          <div class="timer-clock" id="timerClock">00:00</div>
+        </div>
+        <div class="timer-buttons">
+          <button class="timer-btn" onclick="startTimer(180)">3m Té</button>
+          <button class="timer-btn" onclick="startTimer(300)">5m Huevos</button>
+          <button class="timer-btn" onclick="startTimer(600)">10m Pasta</button>
+          <button class="timer-btn" onclick="resetTimer()" style="color:#ef4444;">Parar</button>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+  <footer>
+    <span>Sincronizado vía GitHub &bull; Pantalla BQ 5.5"</span>
+    <button class="fs-btn" onclick="toggleFS()">Pantalla Completa ⛶</button>
+  </footer>
+
+  <script>
+    var currentDayKey = 'martes';
+    var menuData = null;
+
+    // Reloj
+    function updateClock() {
+      var now = new Date();
+      var h = String(now.getHours()).padStart(2, '0');
+      var m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('clock').textContent = h + ':' + m;
+
+      var options = { weekday: 'long', day: 'numeric', month: 'long' };
+      var str = now.toLocaleDateString('es-ES', options);
+      document.getElementById('headerDate').textContent = str.charAt(0).toUpperCase() + str.slice(1);
+    }
+    setInterval(updateClock, 1000);
+    updateClock();
+
+    // Obtener día de hoy
+    function getTodayKey() {
+      var days = ['domingo', 'lunes', 'martes', 'miercoles', 'jueves', 'viernes', 'sabado'];
+      var dayNum = new Date().getDay();
+      return days[dayNum];
+    }
+
+    // Renderizar Día
+    function selectDay(dayKey) {
+      currentDayKey = dayKey;
+      document.querySelectorAll('.day-pill').forEach(function(pill) {
+        if (pill.getAttribute('data-day') === dayKey) {
+          pill.classList.add('active');
+        } else {
+          pill.classList.remove('active');
+        }
+      });
+
+      if (!menuData || !menuData.days || !menuData.days[dayKey]) return;
+      var d = menuData.days[dayKey];
+
+      // Colegio
+      var cardSchool = document.getElementById('cardSchool');
+      if (d.colegio) {
+        cardSchool.style.display = 'block';
+        document.getElementById('schoolMain').textContent = d.colegio.dish_main;
+        document.getElementById('schoolSub').textContent = d.colegio.dish_sub;
+        document.getElementById('schoolDessert').textContent = d.colegio.dessert ? 'Postre: ' + d.colegio.dessert : '';
+      } else {
+        cardSchool.style.display = 'none';
+      }
+
+      // Mediodía
+      document.getElementById('lunchMain').textContent = d.mediodia.dish_main;
+      document.getElementById('lunchSub').textContent = d.mediodia.dish_sub;
+
+      // Cena
+      document.getElementById('dinnerMain').textContent = d.cena.dish_main;
+      document.getElementById('dinnerSub').textContent = d.cena.dish_sub;
+      document.getElementById('dinnerDessert').textContent = d.cena.dessert ? 'Postre: ' + d.cena.dessert : '';
+
+      // Balance
+      document.getElementById('balanceBanner').innerHTML = '&#10003; ' + (d.balance || 'Menú balanceado.');
+    }
+
+    // Cargar menu.json
+    function loadMenuData() {
+      fetch('menu.json?_t=' + new Date().getTime())
+        .then(function(res) { return res.json(); })
+        .then(function(data) {
+          menuData = data;
+          if (data.default_schedule) renderSchedule(data.default_schedule);
+          if (data.default_todos) renderTodos(data.default_todos);
+          selectDay(currentDayKey);
+        })
+        .catch(function(err) {
+          console.log('Error cargando menu.json:', err);
+        });
+    }
+
+    function renderSchedule(items) {
+      var c = document.getElementById('scheduleContainer');
+      c.innerHTML = '';
+      items.forEach(function(it) {
+        var row = document.createElement('div');
+        row.className = 'timeline-item';
+        row.innerHTML = '<div class="time-badge">' + it.time + '</div><div class="time-text">' + it.desc + '</div>';
+        c.appendChild(row);
+      });
+    }
+
+    function renderTodos(defaults) {
+      var saved = localStorage.getItem('bq_kitchen_todos');
+      var list = saved ? JSON.parse(saved) : defaults;
+
+      var c = document.getElementById('todoContainer');
+      c.innerHTML = '';
+      list.forEach(function(item, idx) {
+        var row = document.createElement('div');
+        row.className = 'todo-item';
+        row.onclick = function() {
+          item.done = !item.done;
+          localStorage.setItem('bq_kitchen_todos', JSON.stringify(list));
+          renderTodos(defaults);
+        };
+        row.innerHTML = '<div class="todo-check ' + (item.done ? 'checked' : '') + '"></div><div class="todo-text ' + (item.done ? 'done' : '') + '">' + item.text + '</div>';
+        c.appendChild(row);
+      });
+    }
+
+    // Temporizador Cocina con sonido
+    var timerInt = null;
+    var timerSecs = 0;
+    function playBeep() {
+      try {
+        var AudioCtx = window.AudioContext || window.webkitAudioContext;
+        if (!AudioCtx) return;
+        var ctx = new AudioCtx();
+        var osc = ctx.createOscillator();
+        var gain = ctx.createGain();
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.frequency.value = 880;
+        gain.gain.setValueAtTime(0.5, ctx.currentTime);
+        osc.start();
+        setTimeout(function() { osc.stop(); ctx.close(); }, 600);
+      } catch(e){}
+    }
+    function startTimer(s) {
+      clearInterval(timerInt);
+      timerSecs = s;
+      drawTimer();
+      timerInt = setInterval(function() {
+        timerSecs--;
+        if (timerSecs <= 0) {
+          clearInterval(timerInt);
+          timerSecs = 0;
+          playBeep();
+          alert('⏱️ ¡Tiempo de cocina terminado!');
+        }
+        drawTimer();
+      }, 1000);
+    }
+    function resetTimer() {
+      clearInterval(timerInt);
+      timerSecs = 0;
+      drawTimer();
+    }
+    function drawTimer() {
+      var m = String(Math.floor(timerSecs / 60)).padStart(2, '0');
+      var s = String(timerSecs % 60).padStart(2, '0');
+      document.getElementById('timerClock').textContent = m + ':' + s;
+    }
+
+    // Clima Torrejón
+    function fetchWeather() {
+      fetch('https://api.open-meteo.com/v1/forecast?latitude=40.45&longitude=-3.48&current=temperature_2m,weather_code&timezone=Europe%2FMadrid')
+        .then(function(r){ return r.json(); })
+        .then(function(d){
+          if (d && d.current) {
+            document.getElementById('weatherTemp').textContent = Math.round(d.current.temperature_2m) + '°C';
+            var code = d.current.weather_code;
+            var icon = '☀️';
+            if (code >= 1 && code <= 3) icon = '⛅';
+            else if (code >= 51 && code <= 67) icon = '🌧️';
+            else if (code >= 71) icon = '❄️';
+            document.getElementById('weatherIcon').textContent = icon;
+          }
+        }).catch(function(){});
+    }
+
+    function toggleFS() {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(function(){});
+      } else {
+        if (document.exitFullscreen) document.exitFullscreen();
+      }
+    }
+
+    // Inicio
+    currentDayKey = getTodayKey();
+    loadMenuData();
+    fetchWeather();
+    setInterval(loadMenuData, 5 * 60 * 1000); // Re-sincronizar cada 5 min con GitHub
+    setInterval(fetchWeather, 30 * 60 * 1000);
+  </script>
+</body>
+</html>
