@@ -1,168 +1,164 @@
 {
-  "last_updated": "2026-11-13T22:12:06Z",
-  "week_title": "Semana del 9 al 13 de Noviembre",
+  "last_updated": "2026-11-15T11:01:52Z",
+  "week_title": "Semana del 16 al 20 de Noviembre",
   "location": "Madrid",
   "coords": {
     "lat": 40.45,
     "lon": -3.48
   },
-  "subtitle": "Mediodía: 3p • Cenas: 4p • Pescado Sync: Mié & Vie • Sin Moluscos/Crustáceos",
+  "subtitle": "☀️ Mediodía: 3 personas • 🌙 Cenas: 4 personas • ❄️ Congelador: Pollo y Alitas • Sin Moluscos/Crustáceos",
+  "highlight_pill": "❄️ Congelador: Pollo y Alitas",
+  "fish_note": "Inés come pescado en el colegio el jueves. Sincronizamos las comidas de Paula (12 años) añadiendo un segundo día de pescado seguro el martes. Cero riesgo de moluscos/crustáceos.",
   "days": {
     "lunes": {
       "id": "mon",
-      "name": "Lunes 9",
-      "dayName": "Lunes 9 de Noviembre",
-      "tag": "Lunes de Legumbre",
+      "name": "Lunes 16",
+      "dayName": "Lunes 16 de Noviembre",
+      "tag": "Día de Lentejas",
       "isFishDay": false,
       "colegio": {
-        "dish_main": "Salteado de brócoli y zanahoria + Ragout de ternera y verduras + Patatas fritas",
+        "dish_main": "Pasta integral con salsa de albahaca + Tortilla francesa",
         "dish_sub": "Comida Escolar (Inés • 8 años)",
-        "dessert": "Manzana Golden",
-        "excluded_groups": "Ternera, Brócoli, Patata",
+        "dessert": "Pera",
+        "excluded_groups": "Pasta, Huevo",
         "verified": true
       },
       "mediodia": {
         "people": "3 personas",
         "dish_main": "Lentejas estofadas con zanahoria",
-        "dish_sub": "Plato tradicional reconfortante para empezar la semana."
+        "dish_sub": "Plato reconfortante de cuchara."
       },
       "cena": {
         "people": "4 personas",
-        "dish_main": "Filetes de pavo a la plancha con calabacín rehogado",
-        "dish_sub": "Cena magra para compensar la ternera del colegio.",
+        "dish_main": "Filetes de pollo a la plancha (Congelador) con champiñones",
+        "dish_sub": "Usamos ~600g de filetes de pollo del congelador para toda la familia.",
         "dessert": ""
       },
-      "balance": "✓ Evitamos ternera y patatas."
+      "balance": "✓ Evitamos pasta y huevo."
     },
     "martes": {
       "id": "tue",
-      "name": "Martes 10",
-      "dayName": "Martes 10 de Noviembre",
-      "tag": "Pasta Casera",
-      "isFishDay": false,
-      "colegio": {
-        "dish_main": "Lentejas eco a la jardinera + Tortilla de patata + Ensalada verde",
-        "dish_sub": "Comida Escolar (Inés • 8 años)",
-        "dessert": "Pera",
-        "excluded_groups": "Legumbre, Huevo, Patata",
-        "verified": true
-      },
-      "mediodia": {
-        "people": "3 personas",
-        "dish_main": "Espaguetis a la boloñesa",
-        "dish_sub": "Plato de pasta energético para los 3."
-      },
-      "cena": {
-        "people": "4 personas",
-        "dish_main": "Pechugas de pollo asadas con judías verdes",
-        "dish_sub": "Proteína ligera evitando la legumbre y el huevo.",
-        "dessert": ""
-      },
-      "balance": "✓ Evitamos legumbre y huevo."
-    },
-    "miercoles": {
-      "id": "wed",
-      "name": "Miércoles 11",
-      "dayName": "Miércoles 11 de Noviembre",
+      "name": "Martes 17",
+      "dayName": "Martes 17 de Noviembre",
       "tag": "🐟 Pescado #1",
       "isFishDay": true,
       "colegio": {
-        "dish_main": "Macarrones integrales c/tomate + Merluza asada con hortalizas",
+        "dish_main": "Judías verdes con patatas + Pollo asado + Arroz pilaf",
         "dish_sub": "Comida Escolar (Inés • 8 años)",
-        "dessert": "Mandarina",
-        "excluded_groups": "Pasta, Pescado (Merluza)",
+        "dessert": "Manzana Golden",
+        "excluded_groups": "Judías verdes, Pollo, Arroz",
         "verified": true
       },
       "mediodia": {
         "people": "3 personas",
-        "dish_main": "Lomos de salmón en air fryer con patatas",
-        "dish_sub": "Sincronizado: Pescado seguro para Paula (sin crustáceos)."
+        "dish_main": "Dorada al horno con patatas panadera",
+        "dish_sub": "Pescado seguro para Paula (sin crustáceos)."
       },
       "cena": {
         "people": "4 personas",
-        "dish_main": "Solomillo de cerdo con ensalada de tomate",
-        "dish_sub": "Cena limpia que no repite pasta ni pescado.",
+        "dish_main": "Cinta de lomo a la plancha con pimientos asados",
+        "dish_sub": "Carne de cerdo para evitar repetir el pollo del colegio.",
         "dessert": ""
       },
-      "balance": "✓ Evitamos pescado y pasta."
+      "balance": "✓ Evitamos pollo, judías verdes y arroz."
+    },
+    "miercoles": {
+      "id": "wed",
+      "name": "Miércoles 18",
+      "dayName": "Miércoles 18 de Noviembre",
+      "tag": "Día de Macarrones y Alitas",
+      "isFishDay": false,
+      "colegio": {
+        "dish_main": "Sopa de cocido + Cocido Madrileño (garbanzos, repollo, carne)",
+        "dish_sub": "Comida Escolar (Inés • 8 años)",
+        "dessert": "Mandarina",
+        "excluded_groups": "Sopa, Legumbre (Garbanzos), Carne cocido",
+        "verified": true
+      },
+      "mediodia": {
+        "people": "3 personas",
+        "dish_main": "Macarrones con filetes de pollo (Congelador) en trocitos",
+        "dish_sub": "Aprovechamos los ~400g restantes de filetes de pollo del congelador."
+      },
+      "cena": {
+        "people": "4 personas",
+        "dish_main": "Alitas de pollo crujientes (Congelador) con ensalada",
+        "dish_sub": "¡Cena top! Usamos el kilo entero de alitas que había en el congelador.",
+        "dessert": ""
+      },
+      "balance": "✓ Evitamos garbanzos, carne pesada de cocido y sopa."
     },
     "jueves": {
       "id": "thu",
-      "name": "Jueves 12",
-      "dayName": "Jueves 12 de Noviembre",
-      "tag": "Clásico al Horno",
-      "isFishDay": false,
-      "colegio": {
-        "dish_main": "Crema de calabacín y patata + Estofado garbanzos con magro de cerdo",
-        "dish_sub": "Comida Escolar (Inés • 8 años)",
-        "dessert": "Plátano",
-        "excluded_groups": "Cremas, Garbanzos, Cerdo",
-        "verified": true
-      },
-      "mediodia": {
-        "people": "3 personas",
-        "dish_main": "Pollo al horno con patatas",
-        "dish_sub": "Un clásico al horno muy fácil de digerir."
-      },
-      "cena": {
-        "people": "4 personas",
-        "dish_main": "Revuelto de ajetes tiernos y tacos de jamón",
-        "dish_sub": "Sin gambas. Evitamos cremas y garbanzos.",
-        "dessert": ""
-      },
-      "balance": "✓ Evitamos cerdo, cremas y garbanzos."
-    },
-    "viernes": {
-      "id": "fri",
-      "name": "Viernes 13",
-      "dayName": "Viernes 13 de Noviembre",
+      "name": "Jueves 19",
+      "dayName": "Jueves 19 de Noviembre",
       "tag": "🐟 Pescado Sync #2",
       "isFishDay": true,
       "colegio": {
-        "dish_main": "Arroz salteado con verduras + Palometa con tomate",
+        "dish_main": "Arroz con tomate + Salmón a la naranja",
         "dish_sub": "Comida Escolar (Inés • 8 años)",
-        "dessert": "Yogur natural",
-        "excluded_groups": "Arroz, Pescado (Palometa)",
+        "dessert": "Plátano",
+        "excluded_groups": "Arroz, Pescado (Salmón)",
         "verified": true
       },
       "mediodia": {
         "people": "3 personas",
-        "dish_main": "Dorada al horno con ensalada de la huerta",
-        "dish_sub": "Sincronizado: Segundo día de pescado de Paula."
+        "dish_main": "Lomos de salmón en air fryer",
+        "dish_sub": "Sincronizado: Salmón también en casa para Paula."
+      },
+      "cena": {
+        "people": "4 personas",
+        "dish_main": "Revuelto de champiñones y taquitos de jamón",
+        "dish_sub": "Sin gambas. Evitamos el arroz y el salmón.",
+        "dessert": ""
+      },
+      "balance": "✓ Evitamos arroz y pescado."
+    },
+    "viernes": {
+      "id": "fri",
+      "name": "Viernes 20",
+      "dayName": "Viernes 20 de Noviembre",
+      "tag": "Viernes de Pizza",
+      "isFishDay": false,
+      "colegio": {
+        "dish_main": "Alubias blancas guisadas + Fingers de pollo",
+        "dish_sub": "Comida Escolar (Inés • 8 años)",
+        "dessert": "Yogur natural",
+        "excluded_groups": "Legumbre (Alubias), Pollo empanado",
+        "verified": true
+      },
+      "mediodia": {
+        "people": "3 personas",
+        "dish_main": "Estofado de ternera con patatas",
+        "dish_sub": "Guiso suave de ternera para terminar la semana laboral."
       },
       "cena": {
         "people": "4 personas",
         "dish_main": "Pizza familiar casera (Jamón y queso)",
-        "dish_sub": "Cena divertida de viernes (evitando el arroz y el pescado).",
+        "dish_sub": "Cena divertida de viernes (evitando legumbre y pollo).",
         "dessert": ""
       },
-      "balance": "✓ Evitamos arroz y pescado."
+      "balance": "✓ Evitamos alubias y pollo."
     }
   },
   "shopping": {
     "mercadillo": [
       {
         "category": "Verduras & Hortalizas",
-        "name": "Calabacines",
-        "qty": "2 unidades",
+        "name": "Champiñones frescos (Lunes y Jueves)",
+        "qty": "2 bandejas",
         "done": false
       },
       {
         "category": "Verduras & Hortalizas",
-        "name": "Judías verdes frescas",
-        "qty": "500 g",
+        "name": "Pimientos (para asar o freír)",
+        "qty": "4 unidades",
         "done": false
       },
       {
         "category": "Verduras & Hortalizas",
         "name": "Tomates de ensalada",
         "qty": "1 kg",
-        "done": false
-      },
-      {
-        "category": "Verduras & Hortalizas",
-        "name": "Ajetes tiernos (para revuelto)",
-        "qty": "1 manojo",
         "done": false
       },
       {
@@ -199,44 +195,32 @@
     "ahorramas": [
       {
         "category": "Pescadería",
-        "name": "Lomos de salmón (Comida 3p)",
-        "qty": "3 lomos",
-        "done": false
-      },
-      {
-        "category": "Pescadería",
         "name": "Dorada de ración (Comida 3p)",
         "qty": "3 unidades",
         "done": false
       },
       {
+        "category": "Pescadería",
+        "name": "Lomos de salmón (Comida 3p)",
+        "qty": "3 lomos",
+        "done": false
+      },
+      {
         "category": "Carnicería & Pollería",
-        "name": "Filetes de pavo (Cena 4p)",
+        "name": "Cinta de lomo (Cena 4p)",
         "qty": "500 g",
         "done": false
       },
       {
         "category": "Carnicería & Pollería",
-        "name": "Pechuga de pollo (Cena 4p)",
-        "qty": "500 g",
-        "done": false
-      },
-      {
-        "category": "Carnicería & Pollería",
-        "name": "Carne picada de ternera / mezcla (Comida 3p)",
+        "name": "Ternera para estofado (Comida 3p)",
         "qty": "400 g",
         "done": false
       },
       {
         "category": "Carnicería & Pollería",
-        "name": "Solomillo de cerdo (Cena 4p)",
-        "qty": "1-2 piezas",
-        "done": false
-      },
-      {
-        "category": "Carnicería & Pollería",
-        "name": "Pollo entero troceado (Comida 3p)",
-        "qty": "1 kg",
+        "name": "⚠️ NOTA: Pollo no necesario",
+        "qty": "Usar Congelador",
         "done": false
       },
       {
@@ -259,20 +243,14 @@
       },
       {
         "category": "Despensa & Conservas",
-        "name": "Espaguetis",
+        "name": "Macarrones",
         "qty": "1 paquete",
         "done": false
       },
       {
         "category": "Despensa & Conservas",
-        "name": "Lentejas (secas o bote)",
+        "name": "Lentejas pardinas (secas o bote)",
         "qty": "1 pq / 2 botes",
-        "done": false
-      },
-      {
-        "category": "Despensa & Conservas",
-        "name": "Tomate frito casero",
-        "qty": "2 botes",
         "done": false
       },
       {
@@ -285,18 +263,18 @@
   },
   "recipes": [
     {
-      "icon": "🐟",
-      "title": "Salmón al Horno Jugoso",
-      "tag": "Miércoles Mediodía • 3p",
+      "icon": "🍗",
+      "title": "Alitas Crujientes (Airfryer)",
+      "tag": "Miércoles Cena • 4p",
       "day": "miercoles",
-      "steps": "Precalienta el horno a 190ºC. Coloca los lomos de salmón en una bandeja con un poco de AOVE, sal y eneldo. Hornea 12 minutos (que el centro quede rosado). Acompaña con patatas cocidas al vapor."
+      "steps": "Saca las alitas del congelador con antelación. Sécalas bien con papel. Salpimienta y añade un toque de pimentón. Cocina en la Airfryer a 200ºC durante 20-25 minutos, removiendo a la mitad para que queden muy doradas."
     },
     {
-      "icon": "🥚",
-      "title": "Revuelto de Ajetes",
-      "tag": "Jueves Cena • 4p",
-      "day": "jueves",
-      "steps": "Saltea los ajetes tiernos limpios y troceados. Añade unos taquitos de jamón serrano. Bate bien los huevos, incorpóralos y retira del fuego rápido para que el revuelto quede muy jugoso y nada seco."
+      "icon": "🐟",
+      "title": "Dorada al Horno",
+      "tag": "Martes Mediodía • 3p",
+      "day": "martes",
+      "steps": "Pide en la pescadería que te limpien las doradas para horno. Haz unos cortes en el lomo, pon rodajas de limón, un chorrito de AOVE y sal. Hornea a 190ºC sobre una cama de patatas panadera (unos 20 minutos)."
     },
     {
       "icon": "🍕",
@@ -309,24 +287,24 @@
   "nutrition": {
     "proteins": [
       {
+        "label": "Aves (Pollo/Pavo)",
+        "count": 4,
+        "color": "#e6a15c"
+      },
+      {
         "label": "Pescado",
         "count": 2,
         "color": "#5a735c"
       },
       {
-        "label": "Aves (Pollo/Pavo)",
-        "count": 2,
-        "color": "#e6a15c"
-      },
-      {
-        "label": "Ternera",
-        "count": 2,
-        "color": "#a84e38"
-      },
-      {
         "label": "Cerdo / Magro",
         "count": 1,
         "color": "#c86d51"
+      },
+      {
+        "label": "Ternera",
+        "count": 1,
+        "color": "#a84e38"
       },
       {
         "label": "Huevos",
@@ -341,24 +319,24 @@
     ],
     "veggies": [
       {
-        "day": "Lun 9",
+        "day": "Lun 16",
         "count": 2
       },
       {
-        "day": "Mar 10",
+        "day": "Mar 17",
         "count": 1
       },
       {
-        "day": "Mié 11",
-        "count": 2
-      },
-      {
-        "day": "Jue 12",
+        "day": "Mié 18",
         "count": 1
       },
       {
-        "day": "Vie 13",
+        "day": "Jue 19",
         "count": 2
+      },
+      {
+        "day": "Vie 20",
+        "count": 1
       }
     ]
   }
