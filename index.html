@@ -703,11 +703,11 @@
       <div class="title-row">
         <h1>🍳 Menú Familiar & Cocina</h1>
       </div>
-      <div class="week-subtitle" id="weekSubtitle">Semana del 9 al 13 de Noviembre • Madrid</div>
+      <div class="week-subtitle" id="weekSubtitle">Semana del 16 al 20 de Noviembre • Madrid</div>
       <div class="header-pills">
         <span class="meta-pill">☀️ 3p</span>
         <span class="meta-pill">🌙 4p</span>
-        <span class="meta-pill fish">🐟 Mié & Vie</span>
+        <span class="meta-pill fish" id="highlightPill">❄️ Congelador: Pollo y Alitas</span>
         <span class="meta-pill allergy">🚫 Sin Crustáceos</span>
       </div>
     </div>
@@ -737,11 +737,11 @@
   <!-- TAB 1: HOY -->
   <section id="panel-hoy" class="tab-panel active">
     <div class="day-selector" id="daySelector">
-      <button class="day-pill" data-day="lunes" onclick="selectDay('lunes')">Lun 9</button>
-      <button class="day-pill" data-day="martes" onclick="selectDay('martes')">Mar 10</button>
-      <button class="day-pill" data-day="miercoles" onclick="selectDay('miercoles')">Mié 11 🐟</button>
-      <button class="day-pill" data-day="jueves" onclick="selectDay('jueves')">Jue 12</button>
-      <button class="day-pill" data-day="viernes" onclick="selectDay('viernes')">Vie 13 🐟</button>
+      <button class="day-pill" data-day="lunes" onclick="selectDay('lunes')">Lun 16</button>
+      <button class="day-pill" data-day="martes" onclick="selectDay('martes')">Mar 17 🐟</button>
+      <button class="day-pill" data-day="miercoles" onclick="selectDay('miercoles')">Mié 18</button>
+      <button class="day-pill" data-day="jueves" onclick="selectDay('jueves')">Jue 19 🐟</button>
+      <button class="day-pill" data-day="viernes" onclick="selectDay('viernes')">Vie 20</button>
     </div>
 
     <div class="two-col">
@@ -804,6 +804,7 @@
             <button class="timer-btn" onclick="startTimer(600)">10m Pasta</button>
             <button class="timer-btn" onclick="startTimer(720)">12m Horno</button>
             <button class="timer-btn" onclick="startTimer(900)">15m Pizza</button>
+            <button class="timer-btn" onclick="startTimer(1200)">20m Airfryer</button>
             <button class="timer-btn stop" onclick="resetTimer()">Parar</button>
           </div>
         </div>
@@ -833,13 +834,13 @@
 
   <!-- TAB 2: PLAN SEMANAL -->
   <section id="panel-semanal" class="tab-panel">
-    <div class="day-selector">
-      <button class="day-pill active" id="wf-all" onclick="filterWeekly('all', this)">Todos</button>
-      <button class="day-pill" onclick="filterWeekly('lunes', this)">Lun 9</button>
-      <button class="day-pill" onclick="filterWeekly('martes', this)">Mar 10</button>
-      <button class="day-pill" onclick="filterWeekly('miercoles', this)">Mié 11</button>
-      <button class="day-pill" onclick="filterWeekly('jueves', this)">Jue 12</button>
-      <button class="day-pill" onclick="filterWeekly('viernes', this)">Vie 13</button>
+    <div class="day-selector" id="weeklyDaySelector">
+      <button class="day-pill active" id="wf-all" data-day="all" onclick="filterWeekly('all', this)">Todos</button>
+      <button class="day-pill" data-day="lunes" onclick="filterWeekly('lunes', this)">Lun 16</button>
+      <button class="day-pill" data-day="martes" onclick="filterWeekly('martes', this)">Mar 17</button>
+      <button class="day-pill" data-day="miercoles" onclick="filterWeekly('miercoles', this)">Mié 18</button>
+      <button class="day-pill" data-day="jueves" onclick="filterWeekly('jueves', this)">Jue 19</button>
+      <button class="day-pill" data-day="viernes" onclick="filterWeekly('viernes', this)">Vie 20</button>
     </div>
     <div class="grid-cards" id="weeklyCardsContainer"></div>
   </section>
@@ -870,8 +871,8 @@
       <div class="section-title" style="color:#fda4af;">
         <span>🐟 Estrategia de Sincronización de Pescado (Inés & Paula 12 años)</span>
       </div>
-      <p class="dish-desc" style="margin-top:0; color:#e2e8f0;">
-        Inés come pescado en el colegio el <b>Miércoles</b> y el <b>Viernes</b>. Sincronizamos las comidas de Paula (12 años) en casa esos mismos días asegurando <b>cero moluscos ni crustáceos</b> en todas las recetas.
+      <p class="dish-desc" id="fishStrategyNote" style="margin-top:0; color:#e2e8f0;">
+        Inés come pescado en el colegio el jueves. Sincronizamos las comidas de Paula (12 años) añadiendo un segundo día de pescado seguro el martes. Cero riesgo de moluscos/crustáceos.
       </p>
     </div>
 
@@ -953,132 +954,133 @@
 
   <script>
     var FALLBACK_DATA = {
-      "week_title": "Semana del 9 al 13 de Noviembre",
+      "week_title": "Semana del 16 al 20 de Noviembre",
       "location": "Madrid",
-      "subtitle": "Mediodía: 3p • Cenas: 4p • Pescado Sync: Mié & Vie • Sin Moluscos/Crustáceos",
+      "subtitle": "☀️ Mediodía: 3 personas • 🌙 Cenas: 4 personas • ❄️ Congelador: Pollo y Alitas • Sin Moluscos/Crustáceos",
+      "highlight_pill": "❄️ Congelador: Pollo y Alitas",
+      "fish_note": "Inés come pescado en el colegio el jueves. Sincronizamos las comidas de Paula (12 años) añadiendo un segundo día de pescado seguro el martes. Cero riesgo de moluscos/crustáceos.",
       "days": {
         "lunes": {
           "id": "mon",
-          "name": "Lunes 9",
-          "dayName": "Lunes 9 de Noviembre",
-          "tag": "Lunes de Legumbre",
+          "name": "Lunes 16",
+          "dayName": "Lunes 16 de Noviembre",
+          "tag": "Día de Lentejas",
           "isFishDay": false,
           "colegio": {
-            "dish_main": "Salteado de brócoli y zanahoria + Ragout de ternera y verduras + Patatas fritas",
-            "dessert": "Manzana Golden",
-            "excluded_groups": "Ternera, Brócoli, Patata"
+            "dish_main": "Pasta integral con salsa de albahaca + Tortilla francesa",
+            "dessert": "Pera",
+            "excluded_groups": "Pasta, Huevo"
           },
           "mediodia": {
             "people": "3 personas",
             "dish_main": "Lentejas estofadas con zanahoria",
-            "dish_sub": "Plato tradicional reconfortante para empezar la semana."
+            "dish_sub": "Plato reconfortante de cuchara."
           },
           "cena": {
             "people": "4 personas",
-            "dish_main": "Filetes de pavo a la plancha con calabacín rehogado",
-            "dish_sub": "Cena magra para compensar la ternera del colegio."
+            "dish_main": "Filetes de pollo a la plancha (Congelador) con champiñones",
+            "dish_sub": "Usamos ~600g de filetes de pollo del congelador para toda la familia."
           },
-          "balance": "✓ Evitamos ternera y patatas."
+          "balance": "✓ Evitamos pasta y huevo."
         },
         "martes": {
           "id": "tue",
-          "name": "Martes 10",
-          "dayName": "Martes 10 de Noviembre",
-          "tag": "Pasta Casera",
-          "isFishDay": false,
-          "colegio": {
-            "dish_main": "Lentejas eco a la jardinera + Tortilla de patata + Ensalada verde",
-            "dessert": "Pera",
-            "excluded_groups": "Legumbre, Huevo, Patata"
-          },
-          "mediodia": {
-            "people": "3 personas",
-            "dish_main": "Espaguetis a la boloñesa",
-            "dish_sub": "Plato de pasta energético para los 3."
-          },
-          "cena": {
-            "people": "4 personas",
-            "dish_main": "Pechugas de pollo asadas con judías verdes",
-            "dish_sub": "Proteína ligera evitando la legumbre y el huevo."
-          },
-          "balance": "✓ Evitamos legumbre y huevo."
-        },
-        "miercoles": {
-          "id": "wed",
-          "name": "Miércoles 11",
-          "dayName": "Miércoles 11 de Noviembre",
+          "name": "Martes 17",
+          "dayName": "Martes 17 de Noviembre",
           "tag": "🐟 Pescado #1",
           "isFishDay": true,
           "colegio": {
-            "dish_main": "Macarrones integrales c/tomate + Merluza asada con hortalizas",
-            "dessert": "Mandarina",
-            "excluded_groups": "Pasta, Pescado (Merluza)"
+            "dish_main": "Judías verdes con patatas + Pollo asado + Arroz pilaf",
+            "dessert": "Manzana Golden",
+            "excluded_groups": "Judías verdes, Pollo, Arroz"
           },
           "mediodia": {
             "people": "3 personas",
-            "dish_main": "Lomos de salmón en air fryer con patatas",
-            "dish_sub": "Sincronizado: Pescado seguro para Paula (sin crustáceos)."
+            "dish_main": "Dorada al horno con patatas panadera",
+            "dish_sub": "Pescado seguro para Paula (sin crustáceos)."
           },
           "cena": {
             "people": "4 personas",
-            "dish_main": "Solomillo de cerdo con ensalada de tomate",
-            "dish_sub": "Cena limpia que no repite pasta ni pescado."
+            "dish_main": "Cinta de lomo a la plancha con pimientos asados",
+            "dish_sub": "Carne de cerdo para evitar repetir el pollo del colegio."
           },
-          "balance": "✓ Evitamos pescado y pasta."
+          "balance": "✓ Evitamos pollo, judías verdes y arroz."
+        },
+        "miercoles": {
+          "id": "wed",
+          "name": "Miércoles 18",
+          "dayName": "Miércoles 18 de Noviembre",
+          "tag": "Día de Macarrones y Alitas",
+          "isFishDay": false,
+          "colegio": {
+            "dish_main": "Sopa de cocido + Cocido Madrileño (garbanzos, repollo, carne)",
+            "dessert": "Mandarina",
+            "excluded_groups": "Sopa, Legumbre (Garbanzos), Carne cocido"
+          },
+          "mediodia": {
+            "people": "3 personas",
+            "dish_main": "Macarrones con filetes de pollo (Congelador) en trocitos",
+            "dish_sub": "Aprovechamos los ~400g restantes de filetes de pollo del congelador."
+          },
+          "cena": {
+            "people": "4 personas",
+            "dish_main": "Alitas de pollo crujientes (Congelador) con ensalada",
+            "dish_sub": "¡Cena top! Usamos el kilo entero de alitas que había en el congelador."
+          },
+          "balance": "✓ Evitamos garbanzos, carne pesada de cocido y sopa."
         },
         "jueves": {
           "id": "thu",
-          "name": "Jueves 12",
-          "dayName": "Jueves 12 de Noviembre",
-          "tag": "Clásico al Horno",
-          "isFishDay": false,
-          "colegio": {
-            "dish_main": "Crema de calabacín y patata + Estofado garbanzos con magro de cerdo",
-            "dessert": "Plátano",
-            "excluded_groups": "Cremas, Garbanzos, Cerdo"
-          },
-          "mediodia": {
-            "people": "3 personas",
-            "dish_main": "Pollo al horno con patatas",
-            "dish_sub": "Un clásico al horno muy fácil de digerir."
-          },
-          "cena": {
-            "people": "4 personas",
-            "dish_main": "Revuelto de ajetes tiernos y tacos de jamón",
-            "dish_sub": "Sin gambas. Evitamos cremas y garbanzos."
-          },
-          "balance": "✓ Evitamos cerdo, cremas y garbanzos."
-        },
-        "viernes": {
-          "id": "fri",
-          "name": "Viernes 13",
-          "dayName": "Viernes 13 de Noviembre",
+          "name": "Jueves 19",
+          "dayName": "Jueves 19 de Noviembre",
           "tag": "🐟 Pescado Sync #2",
           "isFishDay": true,
           "colegio": {
-            "dish_main": "Arroz salteado con verduras + Palometa con tomate",
-            "dessert": "Yogur natural",
-            "excluded_groups": "Arroz, Pescado (Palometa)"
+            "dish_main": "Arroz con tomate + Salmón a la naranja",
+            "dessert": "Plátano",
+            "excluded_groups": "Arroz, Pescado (Salmón)"
           },
           "mediodia": {
             "people": "3 personas",
-            "dish_main": "Dorada al horno con ensalada de la huerta",
-            "dish_sub": "Sincronizado: Segundo día de pescado de Paula."
+            "dish_main": "Lomos de salmón en air fryer",
+            "dish_sub": "Sincronizado: Salmón también en casa para Paula."
+          },
+          "cena": {
+            "people": "4 personas",
+            "dish_main": "Revuelto de champiñones y taquitos de jamón",
+            "dish_sub": "Sin gambas. Evitamos el arroz y el salmón."
+          },
+          "balance": "✓ Evitamos arroz y pescado."
+        },
+        "viernes": {
+          "id": "fri",
+          "name": "Viernes 20",
+          "dayName": "Viernes 20 de Noviembre",
+          "tag": "Viernes de Pizza",
+          "isFishDay": false,
+          "colegio": {
+            "dish_main": "Alubias blancas guisadas + Fingers de pollo",
+            "dessert": "Yogur natural",
+            "excluded_groups": "Legumbre (Alubias), Pollo empanado"
+          },
+          "mediodia": {
+            "people": "3 personas",
+            "dish_main": "Estofado de ternera con patatas",
+            "dish_sub": "Guiso suave de ternera para terminar la semana laboral."
           },
           "cena": {
             "people": "4 personas",
             "dish_main": "Pizza familiar casera (Jamón y queso)",
-            "dish_sub": "Cena divertida de viernes (evitando el arroz y el pescado)."
+            "dish_sub": "Cena divertida de viernes (evitando legumbre y pollo)."
           },
-          "balance": "✓ Evitamos arroz y pescado."
+          "balance": "✓ Evitamos alubias y pollo."
         }
       },
       "shopping": {
         "mercadillo": [
-          { "category": "Verduras & Hortalizas", "name": "Calabacines", "qty": "2 unidades", "done": false },
-          { "category": "Verduras & Hortalizas", "name": "Judías verdes frescas", "qty": "500 g", "done": false },
+          { "category": "Verduras & Hortalizas", "name": "Champiñones frescos (Lunes y Jueves)", "qty": "2 bandejas", "done": false },
+          { "category": "Verduras & Hortalizas", "name": "Pimientos (para asar o freír)", "qty": "4 unidades", "done": false },
           { "category": "Verduras & Hortalizas", "name": "Tomates de ensalada", "qty": "1 kg", "done": false },
-          { "category": "Verduras & Hortalizas", "name": "Ajetes tiernos (para revuelto)", "qty": "1 manojo", "done": false },
           { "category": "Verduras & Hortalizas", "name": "Zanahorias y Cebollas", "qty": "1.5 kg", "done": false },
           { "category": "Verduras & Hortalizas", "name": "Patatas", "qty": "2.5 kg", "done": false },
           { "category": "Verduras & Hortalizas", "name": "Lechuga / Mezclum", "qty": "2 bolsas", "done": false },
@@ -1086,36 +1088,33 @@
           { "category": "Frutas de Temporada", "name": "Mandarinas", "qty": "1 kg", "done": false }
         ],
         "ahorramas": [
-          { "category": "Pescadería", "name": "Lomos de salmón (Comida 3p)", "qty": "3 lomos", "done": false },
           { "category": "Pescadería", "name": "Dorada de ración (Comida 3p)", "qty": "3 unidades", "done": false },
-          { "category": "Carnicería & Pollería", "name": "Filetes de pavo (Cena 4p)", "qty": "500 g", "done": false },
-          { "category": "Carnicería & Pollería", "name": "Pechuga de pollo (Cena 4p)", "qty": "500 g", "done": false },
-          { "category": "Carnicería & Pollería", "name": "Carne picada de ternera / mezcla (Comida 3p)", "qty": "400 g", "done": false },
-          { "category": "Carnicería & Pollería", "name": "Solomillo de cerdo (Cena 4p)", "qty": "1-2 piezas", "done": false },
-          { "category": "Carnicería & Pollería", "name": "Pollo entero troceado (Comida 3p)", "qty": "1 kg", "done": false },
+          { "category": "Pescadería", "name": "Lomos de salmón (Comida 3p)", "qty": "3 lomos", "done": false },
+          { "category": "Carnicería & Pollería", "name": "Cinta de lomo (Cena 4p)", "qty": "500 g", "done": false },
+          { "category": "Carnicería & Pollería", "name": "Ternera para estofado (Comida 3p)", "qty": "400 g", "done": false },
+          { "category": "Carnicería & Pollería", "name": "⚠️ NOTA: Pollo no necesario", "qty": "Usar Congelador", "done": false },
           { "category": "Charcutería & Lácteos", "name": "Taquitos de jamón serrano", "qty": "1 paquete", "done": false },
           { "category": "Charcutería & Lácteos", "name": "Jamón cocido + Queso rallado (Pizza)", "qty": "1 paq c/u", "done": false },
           { "category": "Charcutería & Lácteos", "name": "Huevos camperos", "qty": "1 docena", "done": false },
-          { "category": "Despensa & Conservas", "name": "Espaguetis", "qty": "1 paquete", "done": false },
-          { "category": "Despensa & Conservas", "name": "Lentejas (secas o bote)", "qty": "1 pq / 2 botes", "done": false },
-          { "category": "Despensa & Conservas", "name": "Tomate frito casero", "qty": "2 botes", "done": false },
+          { "category": "Despensa & Conservas", "name": "Macarrones", "qty": "1 paquete", "done": false },
+          { "category": "Despensa & Conservas", "name": "Lentejas pardinas (secas o bote)", "qty": "1 pq / 2 botes", "done": false },
           { "category": "Despensa & Conservas", "name": "Masa de pizza refrigerada", "qty": "1-2 bases", "done": false }
         ]
       },
       "recipes": [
         {
-          "icon": "🐟",
-          "title": "Salmón al Horno Jugoso",
-          "tag": "Miércoles Mediodía • 3p",
+          "icon": "🍗",
+          "title": "Alitas Crujientes (Airfryer)",
+          "tag": "Miércoles Cena • 4p",
           "day": "miercoles",
-          "steps": "Precalienta el horno a 190ºC. Coloca los lomos de salmón en una bandeja con un poco de AOVE, sal y eneldo. Hornea 12 minutos (que el centro quede rosado). Acompaña con patatas cocidas al vapor."
+          "steps": "Saca las alitas del congelador con antelación. Sécalas bien con papel. Salpimienta y añade un toque de pimentón. Cocina en la Airfryer a 200ºC durante 20-25 minutos, removiendo a la mitad para que queden muy doradas."
         },
         {
-          "icon": "🥚",
-          "title": "Revuelto de Ajetes",
-          "tag": "Jueves Cena • 4p",
-          "day": "jueves",
-          "steps": "Saltea los ajetes tiernos limpios y troceados. Añade unos taquitos de jamón serrano. Bate bien los huevos, incorpóralos y retira del fuego rápido para que el revuelto quede muy jugoso y nada seco."
+          "icon": "🐟",
+          "title": "Dorada al Horno",
+          "tag": "Martes Mediodía • 3p",
+          "day": "martes",
+          "steps": "Pide en la pescadería que te limpien las doradas para horno. Haz unos cortes en el lomo, pon rodajas de limón, un chorrito de AOVE y sal. Hornea a 190ºC sobre una cama de patatas panadera (unos 20 minutos)."
         },
         {
           "icon": "🍕",
@@ -1127,19 +1126,19 @@
       ],
       "nutrition": {
         "proteins": [
+          { "label": "Aves (Pollo/Pavo)", "count": 4, "color": "#e6a15c" },
           { "label": "Pescado", "count": 2, "color": "#5a735c" },
-          { "label": "Aves (Pollo/Pavo)", "count": 2, "color": "#e6a15c" },
-          { "label": "Ternera", "count": 2, "color": "#a84e38" },
           { "label": "Cerdo / Magro", "count": 1, "color": "#c86d51" },
+          { "label": "Ternera", "count": 1, "color": "#a84e38" },
           { "label": "Huevos", "count": 1, "color": "#f2c94c" },
           { "label": "Legumbres", "count": 1, "color": "#8d6e63" }
         ],
         "veggies": [
-          { "day": "Lun 9", "count": 2 },
-          { "day": "Mar 10", "count": 1 },
-          { "day": "Mié 11", "count": 2 },
-          { "day": "Jue 12", "count": 1 },
-          { "day": "Vie 13", "count": 2 }
+          { "day": "Lun 16", "count": 2 },
+          { "day": "Mar 17", "count": 1 },
+          { "day": "Mié 18", "count": 1 },
+          { "day": "Jue 19", "count": 2 },
+          { "day": "Vie 20", "count": 1 }
         ]
       }
     };
@@ -1302,10 +1301,15 @@
       }
     }
 
+    function getShopStorageKey() {
+      var wt = (appData && appData.week_title) ? appData.week_title : 'default';
+      return 'bq_kitchen_shopping_' + wt.replace(/\s+/g, '_');
+    }
+
     function getShopState() {
       if (shopState) return shopState;
       try {
-        var saved = localStorage.getItem('bq_kitchen_shopping_v2');
+        var saved = localStorage.getItem(getShopStorageKey());
         if (saved) {
           shopState = JSON.parse(saved);
           return shopState;
@@ -1317,7 +1321,7 @@
 
     function saveShopState() {
       try {
-        localStorage.setItem('bq_kitchen_shopping_v2', JSON.stringify(shopState));
+        localStorage.setItem(getShopStorageKey(), JSON.stringify(shopState));
       } catch (e) {}
     }
 
@@ -1641,10 +1645,56 @@
       }
     }
 
+    function formatShortDayPill(dayObj, includeFish) {
+      if (!dayObj || !dayObj.name) return '';
+      var parts = dayObj.name.split(' ');
+      var abbrevMap = {
+        'Lunes': 'Lun',
+        'Martes': 'Mar',
+        'Miércoles': 'Mié',
+        'Miercoles': 'Mié',
+        'Jueves': 'Jue',
+        'Viernes': 'Vie',
+        'Sábado': 'Sáb',
+        'Sabado': 'Sáb',
+        'Domingo': 'Dom'
+      };
+      var prefix = abbrevMap[parts[0]] || parts[0].slice(0, 3);
+      var num = parts[1] ? (' ' + parts[1]) : '';
+      var fish = (includeFish && dayObj.isFishDay) ? ' 🐟' : '';
+      return prefix + num + fish;
+    }
+
+    function renderDaySelectors() {
+      var hoyPills = document.querySelectorAll('#daySelector .day-pill');
+      for (var i = 0; i < hoyPills.length; i++) {
+        var k = hoyPills[i].getAttribute('data-day');
+        if (appData.days && appData.days[k]) {
+          hoyPills[i].textContent = formatShortDayPill(appData.days[k], true);
+        }
+      }
+      var wkPills = document.querySelectorAll('#weeklyDaySelector .day-pill');
+      for (var j = 0; j < wkPills.length; j++) {
+        var wk = wkPills[j].getAttribute('data-day');
+        if (wk && wk !== 'all' && appData.days && appData.days[wk]) {
+          wkPills[j].textContent = formatShortDayPill(appData.days[wk], false);
+        }
+      }
+    }
+
     function renderAll() {
       if (appData.week_title && appData.location) {
         document.getElementById('weekSubtitle').textContent = appData.week_title + ' • ' + appData.location;
       }
+      if (appData.highlight_pill) {
+        var hp = document.getElementById('highlightPill');
+        if (hp) hp.textContent = appData.highlight_pill;
+      }
+      if (appData.fish_note) {
+        var fn = document.getElementById('fishStrategyNote');
+        if (fn) fn.textContent = appData.fish_note;
+      }
+      renderDaySelectors();
       selectDay(currentDayKey);
       renderWeekly('all');
       renderMatrixAndFish();
@@ -1661,6 +1711,9 @@
         })
         .then(function(data) {
           if (data && data.days) {
+            if (data.week_title !== appData.week_title) {
+              shopState = null;
+            }
             appData = data;
             document.getElementById('syncStatus').textContent = 'Sincronizado: ' + pad2(new Date().getHours()) + ':' + pad2(new Date().getMinutes());
             renderAll();
